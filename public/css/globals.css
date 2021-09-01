@@ -12,3 +12,9 @@ html, body {
 *, ::before, ::after {
     box-sizing: inherit;
 }
+
+footer {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: gray;
+}
