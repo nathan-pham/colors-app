@@ -1,1 +1,71 @@
-/* bruh */
+/*
+    <div class="wrapper">
+        <nav class="navigation">
+            <h1>colors</h1>
+
+            <div>
+                <a>generate</a>
+                <a>explore</a>
+
+                <button>sign up</button>
+                <button>sign in</button>
+            </div>
+        </nav>
+    </div>
+*/
+
+.wrapper {
+    max-width: 50rem;
+    padding: 0 1rem;
+    margin: 0 auto;
+}
+
+.wrapper .navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+}
+
+.wrapper .navigation > div {
+    display: flex;
+    align-items: center;
+}
+
+.wrapper .navigation h1 {
+    margin: 0;
+    color: dodgerblue;
+}
+
+.wrapper .navigation .divider {
+    height: 1.25rem;
+    width: 1px;
+    background: gray;
+    margin-left: 1rem;
+}
+
+.wrapper .navigation button,
+.wrapper .navigation a {
+    margin-left: 1rem;
+    color: gray;
+    cursor: pointer;
+}
+
+.wrapper .navigation button {
+    border: none;
+    outline: none;
+    background: none;
+    padding: 0.5rem 0.75rem;
+    font-size: 100%;
+    border-radius: 0.25rem;
+}
+
+.wrapper .navigation button {
+    border: 1px solid gray;
+}
+
+.wrapper .navigation button.primary {
+    background: dodgerblue;
+    border: none;
+    color: #fff;
+}

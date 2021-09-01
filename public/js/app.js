@@ -13,5 +13,21 @@ const forceSecure = () => {
 	}
 }
 
-blockSource()
-forceSecure()
+const registerWorker = () => {
+	if("serviceWorker" in navigator) {
+		navigator.serviceWorker.register("service-worker.js", { scope: '/' })
+	}
+}
+
+export const createApp = (mode) => {
+    blockSource()
+    forceSecure()
+
+    console.log(`Warning: running in ${mode} mode.`)
+
+    if(mode == "PRODUCTION") {
+        registerWorker()
+    }
+}
+
+createApp(MODE)
