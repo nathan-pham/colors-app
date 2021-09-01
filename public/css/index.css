@@ -1,19 +1,3 @@
-/*
-    <div class="wrapper">
-        <nav class="navigation">
-            <h1>colors</h1>
-
-            <div>
-                <a>generate</a>
-                <a>explore</a>
-
-                <button>sign up</button>
-                <button>sign in</button>
-            </div>
-        </nav>
-    </div>
-*/
-
 .wrapper {
     max-width: 50rem;
     padding: 0 1rem;
@@ -44,7 +28,10 @@
     margin-left: 1rem;
 }
 
-.wrapper .navigation button,
+.wrapper .navigation button {
+    margin-left: 1rem;
+}
+
 .wrapper .navigation a {
     margin-left: 1rem;
     color: gray;
@@ -55,37 +42,6 @@
 
 .wrapper .navigation a:hover {
     color: #000;
-}
-
-.wrapper .navigation button {
-    border: none;
-    outline: none;
-    background: none;
-    padding: 0.5rem 0.75rem;
-    font-size: 100%;
-    border-radius: 0.25rem;
-    transition: border 0.2s, color 0.2s;
-}
-
-.wrapper .navigation button {
-    border: 1px solid gray;
-}
-
-.wrapper .navigation button:hover {
-    border-color: #000;
-    color: #000;
-}
-
-.wrapper .navigation button.primary {
-    background: dodgerblue;
-    border: none;
-    color: #fff;
-    transition: background 0.2s;
-}
-
-.wrapper .navigation button.primary:hover {
-    background: rgb(29, 133, 238);
-    color: #fff;
 }
 
 .hero {

@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+/* @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap'); */
 
 html, body {
     height: 100%;
@@ -17,4 +18,33 @@ footer {
     text-align: center;
     padding: 3rem 1rem;
     color: gray;
+}
+
+button {
+    color: gray;
+    cursor: pointer;
+    text-decoration: none;
+    outline: none;
+    background: none;
+    padding: 0.5rem 0.75rem;
+    font-size: 100%;
+    border-radius: 0.25rem;
+    border: 1px solid gray;
+    transition: background 0.2s, border 0.2s, color 0.2s;
+}
+
+button:hover {
+    border-color: #000;
+    color: #000 !important;
+}
+
+button.primary {
+    background: dodgerblue;
+    border: none;
+    color: #fff !important;
+}
+
+button.primary:hover {
+    background: rgb(29, 133, 238);
+    color: #fff;
 }

@@ -1,0 +1,28 @@
+.error-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
+}
+
+.error-wrapper h1 {
+    font-size: 3rem;
+    margin: 0;
+}
+
+.error-wrapper p {
+    color: gray;
+    line-height: 1.5;
+    margin: 2rem 0 0 0;
+}
+
+.error-wrapper button {
+    margin: 0.75rem 0 0 0;
+}
+/*
+    <div class="error-wrapper">
+        <h1><%= error %></h1>
+        <p><%= error == 404 ? "Page not found" : "Internal server error" %></p>
+    </div>
+*/
