@@ -6,9 +6,11 @@ import Preloader from "./components/Preloader.js"
 import Palette from "./components/Palette.js"
 import palettes from "./utils/palettes.js"
 import { pick } from "./utils/random.js"
+import { $ } from "./utils/query.js"
 
-const paletteWrapper = document.querySelector(".palette-wrapper")
-const preloader = document.querySelector(".preloader")
+const [ signIn, signUp ] = $(".user-action")
+const paletteWrapper = $(".palette-wrapper")
+const preloader = $(".preloader")
 
 for(let i = 0; i < 99; i++) {
     const palette = new Palette({
@@ -18,7 +20,6 @@ for(let i = 0; i < 99; i++) {
 
     paletteWrapper.appendChild(palette.render())
 
-
     gsap.to(preloader, {
         delay: 1,
         opacity: 0,
@@ -27,3 +28,15 @@ for(let i = 0; i < 99; i++) {
         onComplete: () => preloader.remove()
     })
 }
+
+signIn.addEventListener("click", () => {
+    console.log("sign in")
+})
+
+signUp.addEventListener("click", () => {
+    console.log("sign up")
+})
+/*
+ <button class="user-action">sign in</button>
+                <button class="user-action primary">sign up</button>
+ */
