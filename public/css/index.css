@@ -81,7 +81,7 @@
 
 
 .palette-wrapper .palette:hover {
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     transform: translateY(-0.5rem);
 }
 
@@ -108,4 +108,45 @@
 
 .palette-wrapper .palette .details p {
     margin: 0;
+}
+
+.icon-scroll {
+    width: 1.5rem;
+    height: 2.5rem;
+    border: 1px solid gray;
+    border-radius: 10rem;
+    position: relative;
+    overflow: hidden;
+    margin: 1rem auto 0 auto;
+}
+
+.icon-scroll::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 0.5rem;
+    height: 0.5rem;
+    left: 50%;
+    top: 0.25rem;
+    transform: translateX(-50%);
+    background: gray;
+    border-radius: 50%;
+    animation: a-scroll 1.25s linear infinite;
+}
+
+@keyframes a-scroll {
+    0% {
+        top: 0.25rem;
+        opacity: 0;
+    }
+    
+    10% {
+        top: 0.25rem;
+        opacity: 1;
+    }
+
+    100% {
+        top: 1.75rem;
+        opacity: 0;
+    }
 }

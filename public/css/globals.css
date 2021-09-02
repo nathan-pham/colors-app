@@ -8,6 +8,8 @@ html, body {
     margin: 0;
     box-sizing: border-box;
     font-family: "Roboto", sans-serif;
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
 }
 
 *, ::before, ::after {
@@ -47,4 +49,37 @@ button.primary {
 button.primary:hover {
     background: rgb(29, 133, 238);
     color: #fff;
+}
+
+.preloader {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.preloader .spinner {
+    --thickness: 3px;
+
+    border: var(--thickness) solid #f3f3f3; 
+    border-top: var(--thickness) solid dodgerblue;
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    animation: a-spin 0.75s linear infinite;
+}
+
+@keyframes a-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
