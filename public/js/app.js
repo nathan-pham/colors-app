@@ -25,11 +25,12 @@ const registerWorker = () => {
 export const createApp = (mode) => {
     console.log(`Warning: running in ${mode} mode.`)
 
-    if(mode !== DEVELOPMENT) {
-        blockSource()
-        forceSecure()
-    } if(mode == PRODUCTION) {
+    // blockSource()
+    // forceSecure()
+
+    if(mode == PRODUCTION) {
         registerWorker()
+    
     }
 }
 

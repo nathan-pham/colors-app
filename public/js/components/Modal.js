@@ -34,7 +34,19 @@ export default class Modal {
                 )
             )
             : (
-                div()
+                div({ class: "form-wrapper" },
+                    div({ class: "form" },
+                        ionicon({ name: "close-outline", class: "close" }),
+
+                        h1({}, "Hello!"),
+                        p({}, "Sign into your account here"),
+
+                        cinput({ icon: "mail-outline", placeholder: "Email", type: "email"}),
+                        cinput({ icon: "lock-closed-outline", placeholder: "Password", type: "password"}),
+
+                        button({ class: "primary" }, "Sign in")
+                    )
+                )
             )
     }
 }

@@ -7,7 +7,7 @@ import Modal from "./components/Modal.js"
 
 import palettes from "./utils/palettes.js"
 
-import { fadeIn, fadeOut } from "./utils/animations.js"
+import { fadeIn, fadeOut, scaleIn, scaleOut } from "./utils/animations.js"
 import { query } from "./utils/query.js"
 import { pick } from "./utils/random.js"
 import { $ } from "./utils/dom.js"
@@ -23,29 +23,28 @@ for(let i = 0; i < 99; i++) {
 
 if(preloader) { fadeOut(preloader, { remove: true, delay: 1 }) }
 
-signIn.addEventListener("click", () => {
-    console.log("sign in")
-})
+const createModal = (config) => () => {
+    const modal = new Modal(config).render()
+    const close = $(modal, ".close")
+    const form = $(modal, ".form")
+    
+    const animateOut = () => {
+        scaleOut(form)
+        fadeOut(modal, { remove: true, delay: 1 })
+    }
 
-signUp.addEventListener("click", () => {
-    const modal = new Modal({ mode: "sign-up" }).render()
     modal.addEventListener("click", e => {
         e.stopPropagation()
 
-        if(e.target === modal) {
-            fadeOut(modal, { remove: true })
-        }
+        if(e.target === modal) { animateOut() }
     })
 
-    const close = $(modal, ".close")
-    close.addEventListener("click", e => { fadeOut(modal, { remove: true }) })
-    
-    const form = $(modal, ".form")
+    close.addEventListener("click", e => { animateOut() })
     
     document.body.appendChild(modal)
     fadeIn(modal, { duration: 0.5})
-})
-/*
- <button class="user-action">sign in</button>
-                <button class="user-action primary">sign up</button>
- */
+    scaleIn(form, { delay: 0.5 })
+}
+
+signIn.addEventListener("click", createModal({ mode: "sign-in" }))
+signUp.addEventListener("click", createModal({ mode: "sign-up" }))
