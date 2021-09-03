@@ -1,4 +1,9 @@
-export const $ = (query) => {
-    const nodes = document.querySelectorAll(query)
-    return nodes.length > 1 ? [...nodes] : nodes[0]
-}
+export const query = (payload) => (
+    fetch("/graphql", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: payload })
+    })
+        .then(res => res.json())
+        .catch(e => ({ data: { error: "failed to query graphql server" } }))
+)

@@ -1,17 +1,17 @@
 import { jsh } from "https://esm.sh/stateful-components"
-
 const { wrap, div, p } = jsh
 const ionicon = wrap("ion-icon")
 
 export default class Palette {
-    constructor({ palette, saves }) {
+    constructor({ palette=[], saves=1 }) {
         this.palette = palette
-        this.saves = `${ saves } saves`
-
-        if(saves == 1) { this.saves = this.saves.slice(0, -1) }
+        this.saves = saves
     }
 
     render() {
+        let saves = `${ this.saves } saves`
+        if(saves == 1) { saves = saves.slice(0, -1) }
+
         return (
             div({ class: "palette" }, 
                 div({ class: "colors" },
@@ -21,7 +21,7 @@ export default class Palette {
                     }))
                 ),
                 div({ class: "details" }, 
-                    p({}, this.saves),
+                    p({}, saves),
                     ionicon({ name: "ellipsis-horizontal" })
                 )
             )

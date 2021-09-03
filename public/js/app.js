@@ -1,3 +1,6 @@
+const DEVELOPMENT = "DEVELOPMENT"
+const PRODUCTION = "PRODUCTION"
+
 const blockSource = () => {
 	document.addEventListener("contextmenu", e => e.preventDefault())
 
@@ -20,12 +23,12 @@ const registerWorker = () => {
 }
 
 export const createApp = (mode) => {
-    blockSource()
-    forceSecure()
-
     console.log(`Warning: running in ${mode} mode.`)
 
-    if(mode == "PRODUCTION") {
+    if(mode !== DEVELOPMENT) {
+        blockSource()
+        forceSecure()
+    } if(mode == PRODUCTION) {
         registerWorker()
     }
 }

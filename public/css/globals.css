@@ -30,7 +30,7 @@ button {
     background: none;
     padding: 0.5rem 0.75rem;
     font-size: 100%;
-    border-radius: 0.25rem;
+    border-radius: 0.5rem;
     border: 1px solid gray;
     transition: background 0.2s, border 0.2s, color 0.2s;
 }
