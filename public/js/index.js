@@ -3,8 +3,11 @@ import { jsh } from "https://esm.sh/stateful-components"
 import gsap, { Expo } from "https://esm.sh/gsap"
 
 import Palette from "./components/Palette.js"
+import Modal from "./components/Modal.js"
 
 import palettes from "./utils/palettes.js"
+
+import { fadeIn, fadeOut } from "./utils/animations.js"
 import { query } from "./utils/query.js"
 import { pick } from "./utils/random.js"
 import { $ } from "./utils/dom.js"
@@ -18,22 +21,29 @@ for(let i = 0; i < 99; i++) {
     paletteWrapper.appendChild(palette.render())
 }
 
-if(preloader) {
-    gsap.to(preloader, {
-        delay: 1,
-        opacity: 0,
-        duration: 1,
-        ease: Expo.easeInOut,
-        onComplete: () => preloader.remove()
-    })
-}
+if(preloader) { fadeOut(preloader, { remove: true, delay: 1 }) }
 
 signIn.addEventListener("click", () => {
     console.log("sign in")
 })
 
 signUp.addEventListener("click", () => {
-    console.log("sign up")
+    const modal = new Modal({ mode: "sign-up" }).render()
+    modal.addEventListener("click", e => {
+        e.stopPropagation()
+
+        if(e.target === modal) {
+            fadeOut(modal, { remove: true })
+        }
+    })
+
+    const close = $(modal, ".close")
+    close.addEventListener("click", e => { fadeOut(modal, { remove: true }) })
+    
+    const form = $(modal, ".form")
+    
+    document.body.appendChild(modal)
+    fadeIn(modal, { duration: 0.5})
 })
 /*
  <button class="user-action">sign in</button>

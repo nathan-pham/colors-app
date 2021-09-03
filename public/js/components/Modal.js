@@ -34,7 +34,7 @@ export default class Modal {
                 )
             )
             : (
-                ""
+                div()
             )
     }
 }
