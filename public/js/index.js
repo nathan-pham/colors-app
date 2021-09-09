@@ -8,7 +8,7 @@ import Modal from "./components/Modal.js"
 import palettes from "./utils/palettes.js"
 
 import { fadeIn, fadeOut, scaleIn, scaleOut } from "./utils/animations.js"
-import { query } from "./utils/query.js"
+import { graphql } from "./utils/graphql.js"
 import { pick } from "./utils/random.js"
 import { $ } from "./utils/dom.js"
 

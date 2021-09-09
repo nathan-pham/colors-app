@@ -1,4 +1,4 @@
-export const query = (payload) => (
+export const graphql = (payload) => (
     fetch("/graphql", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
