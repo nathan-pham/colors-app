@@ -18,7 +18,15 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static("public"))
 
 const main = (async () => {
-    const server = new ApolloServer({ typeDefs, resolvers })
+    const server = new ApolloServer({ 
+        typeDefs, 
+        resolvers,
+        context: ({ req }) => {
+
+        }
+
+        // https://www.apollographql.com/docs/apollo-server/security/authentication/
+    })
     
     await server.start()
     server.applyMiddleware({ app })

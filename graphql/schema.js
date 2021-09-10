@@ -2,9 +2,10 @@ const { gql } = require("apollo-server-express")
 
 const typeDefs = gql`
     type User {
+        id: ID!
         email: String!
         password: String!
-        palettes: [Palette!]!
+        palettes: [ID]!
     }
 
     type Palette {
@@ -14,14 +15,18 @@ const typeDefs = gql`
     }
 
     type Query {
-        hello: String!
         getAllPalettes: [Palette!]!
+        getUserPalettes: [Palette!]!
+
+        loginUser: User!
+        logoutUser: User!
     }
 
     type Mutation {
         createUser(email: String!, password: String!): User!
+
         createPalette(colors: [String!]!): Palette!
-        updatePalette(id: ID!): Palette!
+        updatePalette(id: ID!, colors: [String], sign: Int!): Palette!
     }
 `
 
@@ -44,18 +49,6 @@ database structure
         }
     ]
 }
-
-methods: allPalettes
-         allUserPalettes
-         
-         createUser
-         loginUser
-         logoutUser
-
-         createPalette
-         updatePalette
-
-         
 */
 
 module.exports = typeDefs

@@ -1,76 +1,60 @@
+const { Deta } = require("deta")
+const bcrypt = require("bcrypt")
+
+const deta = Deta(process.env.DETA_PROJECT_KEY)
+
+const usersDB = deta.Base("users")
+const palettesDB = deta.Base("palettes")
+
+const format = (obj) => ({
+    ...obj,
+    key: null,
+    id: obj.key
+})
+
 module.exports = {
     Query: {
-        hello: () => "Hello World",
-        getAllPalettes: () => {
-            return [
-                {
-                    id: 1,
-                    likes: 0,
-                    colors: ["#000"]
-                }
-            ]
-        }
+        getAllPalettes: () => {},
+        
+        getUserPalettes: () => {},
+
+        loginUser: () => {},
+
+        logoutUser: () => {}
     },
 
     Mutation: {
-        createUser: (_, args) => {
-            return {
-                email: args.email,
-                password: args.password,
-                palettes: [
-                    {
-                        id: 1,
-                        likes: 0,
-                        colors: ["#000"]
-                    }
-                ]
-            }
-        },
-        
-        createPalette: (_, args) => {
-            return args
+        createUser: async (_, { email, password }) => (
+            format(await usersDB.put({ 
+                email, 
+                password: bcrypt.hash(password, 10),
+                palettes: []
+            }))
+        ),
+
+        createPalette: async (_, { colors }) => {
+            format(await palettesDB.put({ likes: 0, colors: [] }))
         },
 
-        updatePalette: (_, args) => {
-            
+        updatePalette: (_, { id, colors, sign=0 }) => {
+            // Math.sign(sign)
         }
     }
 }
 
 /*
-writing mutations
-
-mutation Mutation {
-  createUser(email: "Nathan", password: "ok") {
-    email,
-    palettes {
-      likes,
-      colors
-    }
-  }
-}
-*/
-
-/*
-type User {
-        email: String!
-        password: String!
-        palettes: [Palette!]!
-    }
-
-    type Palette {
-        id: ID!
-        likes: Int!
-        colors: [String!]!
-    }
-
     type Query {
-        hello: String!
+        getAllPalettes: [Palette!]!
+        getUserPalettes(id: ID!): [Palette!]!
+
+        loginUser: User!
+        logoutUser: User!
     }
 
     type Mutation {
-        createUser(name: String!, password: String!): User!
-        createPalette(colors: [String!]!)
-        updatePalette(id: ID!)
+        createUser(email: String!, password: String!): User!
+
+        createPalette(colors: [String!]!): Palette!
+        updatePalette(id: ID!): Palette!
     }
- */
+*/
