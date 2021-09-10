@@ -60,6 +60,15 @@ button.primary:hover {
     color: #fff;
 }
 
+button:disabled {
+    cursor: not-allowed;
+    background: rgb(93, 174, 255);
+}
+
+button:disabled:hover {
+    background: rgb(93, 174, 255);
+}
+
 /* preloader overlay */
 .preloader {
     height: 100%;

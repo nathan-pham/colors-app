@@ -6,5 +6,5 @@ export default (query) => (
         body: JSON.stringify({ query })
     })
         .then(res => res.json())
-        .catch(e => ({ data: { error: "failed to query graphql server" } }))
+        .catch(() => ({ errors: [ "Failed to query graphql server" ] }))
 )

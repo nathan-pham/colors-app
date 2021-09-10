@@ -3,6 +3,8 @@ import gsap, { Expo } from "https://esm.run/gsap"
 // remove when animation completes
 const removeOnComplete = (config, element) => { if(config.remove) element.remove() }
 
+export const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
+
 // shared properties across all animations
 export const shared = (config={}, baseAnimation={}) => ({
     duration: 1,

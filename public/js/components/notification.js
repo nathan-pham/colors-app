@@ -14,20 +14,23 @@ const aliases = {
 // notification component
 const notification =  ({ icon="default", text, title }={}) => (
     div({ class: "notification" },
-        ion_icon({ name: `${ aliases[icon] }-outline` }),
+        ion_icon({ name: `${ aliases[icon] || aliases["default"] }-outline` }),
         h1({}, title),
         p({}, text)
     )
 )
 
+
 export const create = (config) => {
+    // base animations
+    const animationStart = shared({ opacity: 0, y: "10rem" })
+    const animationEnd = shared({ opacity: 1, y: 0 })
+
     // create notification component & append it to the body
     const element = notification(config)
     document.body.appendChild(element)
 
     // animate notification
-    const animationStart = shared({ opacity: 0, y: "10rem" })
-    const animationEnd = shared({ opacity: 1, y: 0 })
     gsap.fromTo(element, animationStart, animationEnd)
     gsap.fromTo(element, animationEnd, { ...animationStart, delay: 4, onComplete: () => element.remove() })
 }

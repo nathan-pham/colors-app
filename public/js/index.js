@@ -1,13 +1,11 @@
 import "https://cdn.jsdelivr.net/npm/ionicons/dist/ionicons/ionicons.esm.js"
 
-// import components
+// components
 import signUpModal from "./components/modal/signUpModal.js"
 import signInModal from "./components/modal/signInModal.js"
 
 // component utilities
-import { create as createNotification } from "./components/notification.js"
 import { remove as removePreloader } from "./components/preloader.js"
-
 import { $, elements } from "./utils/elements.js"
 
 // animations
