@@ -1,50 +1,50 @@
 import "https://cdn.jsdelivr.net/npm/ionicons/dist/ionicons/ionicons.esm.js"
-import { jsh } from "https://esm.sh/stateful-components"
-import gsap, { Expo } from "https://esm.sh/gsap"
 
-import Palette from "./components/Palette.js"
-import Modal from "./components/Modal.js"
+// import components
+import signUpModal from "./components/modal/signUpModal.js"
+import signInModal from "./components/modal/signInModal.js"
 
-import palettes from "./utils/palettes.js"
+// component utilities
+import { create as createNotification } from "./components/notification.js"
+import { remove as removePreloader } from "./components/preloader.js"
 
-import { fadeIn, fadeOut, scaleIn, scaleOut } from "./utils/animations.js"
-import { graphql } from "./utils/graphql.js"
-import { pick } from "./utils/random.js"
-import { $ } from "./utils/dom.js"
+import { $, elements } from "./utils/elements.js"
 
+// animations
+import * as a from "./utils/animations.js"
+
+// select elements
 const [ signIn, signUp ] = $(".user-action")
-const paletteWrapper = $(".palette-wrapper")
-const preloader = $(".preloader")
+removePreloader($(".preloader"))
 
-for(let i = 0; i < 99; i++) {
-    const palette = new Palette({ palette: pick(palettes), saves: Math.floor(Math.random() * 100) })
-    paletteWrapper.appendChild(palette.render())
-}
-
-if(preloader) { fadeOut(preloader, { remove: true, delay: 1 }) }
-
-const createModal = (config) => () => {
-    const modal = new Modal(config).render()
+// append modal to body onClick signIn or signUp
+const onClick = (type) => () => {
+    const modal = type == "signUpModal" ? signUpModal() : signInModal()
     const close = $(modal, ".close")
     const form = $(modal, ".form")
-    
-    const animateOut = () => {
-        scaleOut(form)
-        fadeOut(modal, { remove: true, delay: 1 })
+
+    // define local animations
+    const scaleFadeOut = () => {
+        a.scaleOut(form)
+        a.fadeOut(modal, { delay: 0.5, remove: true })
     }
 
+    const scaleFadeIn = () => {
+        a.fadeIn(modal, {  })
+        a.scaleIn(form, { delay: 0.5 })
+    }
+
+    // close modal if click on x or outside of main form
+    close.addEventListener("click", () => scaleFadeOut())
     modal.addEventListener("click", e => {
         e.stopPropagation()
-
-        if(e.target === modal) { animateOut() }
+        if(e.target === modal) { scaleFadeOut() }
     })
 
-    close.addEventListener("click", e => { animateOut() })
-    
     document.body.appendChild(modal)
-    fadeIn(modal, { duration: 0.5})
-    scaleIn(form, { delay: 0.5 })
+    scaleFadeIn()
 }
 
-signIn.addEventListener("click", createModal({ mode: "sign-in" }))
-signUp.addEventListener("click", createModal({ mode: "sign-up" }))
+// apply onClick event listener
+signIn.addEventListener("click", onClick("signInModal"))
+signUp.addEventListener("click", onClick("signUpModal"))

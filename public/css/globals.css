@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-/* @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap'); */
+/* @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 
 html, body {
     height: 100%;
@@ -7,21 +7,30 @@ html, body {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: "Roboto", sans-serif;
+    font-family: "Inter", sans-serif;
+
+    /* hide scroll bar */
     -ms-overflow-style: none;
     scrollbar-width: none; 
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* reset box-sizing */
 *, ::before, ::after {
     box-sizing: inherit;
 }
 
+/* basic footer (made with love) */
 footer {
     text-align: center;
     padding: 3rem 1rem;
     color: gray;
 }
 
+/* default button styles */
 button {
     color: gray;
     cursor: pointer;
@@ -51,6 +60,7 @@ button.primary:hover {
     color: #fff;
 }
 
+/* preloader overlay */
 .preloader {
     height: 100%;
     width: 100%;
@@ -75,11 +85,48 @@ button.primary:hover {
     animation: a-spin 0.75s linear infinite;
 }
 
+/* bottom left notification */
+.notification {
+    box-shadow: 0 0 1rem #eaeaea;
+    border-radius: 1.25rem;
+    padding: 1.75rem;
+    background: #fff;
+    position: fixed;
+    left: 2rem;
+    bottom: 2rem;
+    z-index: 100;
+    width: 17rem;
+}
+
+.notification ion-icon {
+    font-size: 2.25rem;
+    color: dodgerblue;
+}
+
+.notification h1 {
+    margin: 1rem 0 0 0;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.notification p {
+    margin: 0.5rem 0 0 0;
+    color: gray;
+}
+
+/*
+<div class="notification">
+        <!-- neutral: <ion-icon name="notifications-outline"></ion-icon> -->
+        <!-- bug: <ion-icon name="bug-outline"></ion-icon> -->
+        <!-- info: <ion-icon name="information-outline"></ion-icon> -->
+
+        <h1>Success!</h1>
+        <p>You can now log in.</p>
+    </div>
+*/
+
+/* animations */
 @keyframes a-spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-}
-
-::-webkit-scrollbar {
-    display: none;
 }

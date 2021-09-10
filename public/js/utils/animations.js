@@ -1,42 +1,31 @@
-import gsap, { Expo } from "https://esm.sh/gsap"
+import gsap, { Expo } from "https://esm.run/gsap"
 
-export const scaleIn = (element, { config={} }={}) => {
-    gsap.from(element, {
-        ...config,
-        scale: 0,
-        duration: 1,
-        ease: Expo.easeInOut
-    })
+// remove when animation completes
+const removeOnComplete = (config, element) => { if(config.remove) element.remove() }
+
+// shared properties across all animations
+export const shared = (config={}, baseAnimation={}) => ({
+    duration: 1,
+    ease: Expo.easeInOut,
+    ...baseAnimation,
+    ...config
+})
+
+// animate in
+export const scaleIn = (element, config) => gsap.from(element, shared(config, { scale: 0 }))
+export const fadeIn = (element, config) => gsap.from(element, shared(config, { opacity: 0 }))
+
+// animate out
+export const scaleOut = (element, { remove, ...config }={}) => {
+    const animation = shared(config, { scale: 0 })
+    if(remove) { animation.onComplete = () => element.remove() }    
+
+    gsap.to(element, animation)
 }
 
-export const scaleOut = (element, { config={} }={}) => {
-    gsap.to(element, {
-        ...config, 
-        scale: 0,
-        duration: 1,
-        ease: Expo.easeInOut
-    })
-}
+export const fadeOut = (element, { remove, ...config }={}) => {
+    const animation = shared(config, { opacity: 0 })
+    if(remove) { animation.onComplete = () => element.remove() }    
 
-export const fadeIn = (element, { config={} }={}) => {
-    gsap.from(element, {
-        ...config,
-        opacity: 0,
-        duration: 1,
-        ease: Expo.easeInOut
-    })
-}
-
-export const fadeOut = (element, { remove=false, config={} }={}) => {
-    gsap.to(element, {
-        ...config,
-        opacity: 0,
-        duration: 1,
-        ease: Expo.easeInOut,
-        onComplete: () => {
-            if(remove) {
-                element.remove()
-            }
-        }
-    })
+    gsap.to(element, animation)
 }

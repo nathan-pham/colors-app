@@ -30,7 +30,6 @@ export const createApp = (mode) => {
 
     if(mode == PRODUCTION) {
         registerWorker()
-    
     }
 }
 

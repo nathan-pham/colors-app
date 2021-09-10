@@ -22,7 +22,8 @@ const main = (async () => {
         typeDefs, 
         resolvers,
         context: ({ req }) => {
-
+            
+            return { req }
         }
 
         // https://www.apollographql.com/docs/apollo-server/security/authentication/

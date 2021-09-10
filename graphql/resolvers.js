@@ -24,12 +24,17 @@ module.exports = {
     },
 
     Mutation: {
-        createUser: async (_, { email, password }) => (
-            format(await usersDB.put({ 
-                email, 
-                password: bcrypt.hash(password, 10),
-                palettes: []
-            }))
+        createUser: async (_, { name, email, password }) => (
+            name && email && password
+                ? (
+                    format(await usersDB.put({ 
+                        name,
+                        email, 
+                        password: await bcrypt.hash(password, 10),
+                        palettes: []
+                    }))
+                )
+                : new Error("missing a required field")
         ),
 
         createPalette: async (_, { colors }) => {

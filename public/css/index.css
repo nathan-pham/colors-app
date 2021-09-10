@@ -46,7 +46,7 @@
 
 .hero {
     text-align: center;
-    max-width: 20rem;
+    max-width: 22rem;
     margin: 0 auto;
 }
 
@@ -81,7 +81,7 @@
 
 
 .palette-wrapper .palette:hover {
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0.5rem 1rem #eaeaea;
     transform: translateY(-0.5rem);
 }
 

@@ -3,6 +3,7 @@ const { gql } = require("apollo-server-express")
 const typeDefs = gql`
     type User {
         id: ID!
+        name: String!
         email: String!
         password: String!
         palettes: [ID]!
@@ -23,7 +24,7 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        createUser(email: String!, password: String!): User!
+        createUser(name: String!, email: String!, password: String!): User!
 
         createPalette(colors: [String!]!): Palette!
         updatePalette(id: ID!, colors: [String], sign: Int!): Palette!
