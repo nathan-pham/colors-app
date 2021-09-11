@@ -33,7 +33,9 @@ const main = (async () => {
     server.applyMiddleware({ app })
 
     for(const endpoint of endpoints) {
-        endpoint(app, config)
+        if(typeof endpoint == "function") {
+            endpoint(app, config)
+        }
     }
 
     app.listen(config.port, () => {
