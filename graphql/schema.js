@@ -6,7 +6,8 @@ const typeDefs = gql`
         name: String!
         email: String!
         password: String!
-        palettes: [ID]!
+        palettes: [ID]!,
+        token: String
     }
 
     type Palette {
@@ -19,7 +20,7 @@ const typeDefs = gql`
         getAllPalettes: [Palette!]!
         getUserPalettes: [Palette!]!
 
-        loginUser: User!
+        loginUser(email: String!, password: String!): User!
         logoutUser: User!
     }
 

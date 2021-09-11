@@ -1,5 +1,6 @@
 const { ApolloServer } = require("apollo-server-express")
 const express = require("express")
+
 const path = require("path")
 
 const resolvers = require("./graphql/resolvers")
@@ -21,11 +22,7 @@ const main = (async () => {
     const server = new ApolloServer({ 
         typeDefs, 
         resolvers,
-        context: ({ req }) => {
-            
-            return { req }
-        }
-
+        context: (full) => full
         // https://www.apollographql.com/docs/apollo-server/security/authentication/
     })
     
