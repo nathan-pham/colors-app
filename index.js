@@ -1,4 +1,5 @@
 const { ApolloServer } = require("apollo-server-express")
+const cookieParser = require("cookie-parser")
 const express = require("express")
 
 const path = require("path")
@@ -14,6 +15,7 @@ app.engine("html", require("ejs").renderFile)
 app.set("views", path.join(__dirname, "templates"))
 app.set("view engine", "html")
 
+app.use(cookieParser())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static("public"))
@@ -23,6 +25,7 @@ const main = (async () => {
         typeDefs, 
         resolvers,
         context: (full) => full
+        
         // https://www.apollographql.com/docs/apollo-server/security/authentication/
     })
     

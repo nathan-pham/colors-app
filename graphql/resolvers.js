@@ -19,17 +19,20 @@ module.exports = {
         
         getUserPalettes: () => {},
 
-        loginUser: async (_, { email, password }) => {
+        loginUser: async (_, { email, password }, { res }) => {
             const user = (await usersDB.fetch({ email })).items[0]
             const success = (user && await bcrypt.compare(password, user.password))
 
+            const expiresIn = new Date().getTime() * 60 * 60 * 1000
             const token = jwt.sign(
                 { email }, process.env.JWT_SECRET, 
-                {
-                    algorithm: "HS512", 
-                    expiresIn: new Date().getTime() * 60 * 60 * 1000
-                }
+                { algorithm: "HS512", expiresIn }
             )
+
+            res.cookie("JWT_TOKEN", token, {
+                httpOnly: true, 
+                secure: true
+            })
 
             if(success) {
                 return format({

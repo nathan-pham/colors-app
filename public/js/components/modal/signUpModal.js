@@ -27,13 +27,12 @@ const onSubmit = async (e) => {
         }
     `).then(async ({ data, errors }) => {
         await sleep(750)
-        submit.disabled = false
         close.click()
 
         await sleep(1000)
         createNotification(data
             ? { icon: "info", title: "Created account", text: "You can now sign in with your account" }
-            : { icon: "error", title: "Retry that...", text: "Something went wrong on our end. Please try again." }
+            : { icon: "error", title: "Retry that...", text: errors[0].message }
         )
     })
 

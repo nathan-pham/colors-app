@@ -1,15 +1,15 @@
 import "https://cdn.jsdelivr.net/npm/ionicons/dist/ionicons/ionicons.esm.js"
 
 // components
-import signUpModal from "./components/modal/signUpModal.js"
-import signInModal from "./components/modal/signInModal.js"
+import signUpModal from "/js/components/modal/signUpModal.js"
+import signInModal from "/js/components/modal/signInModal.js"
 
 // component utilities
-import { remove as removePreloader } from "./components/preloader.js"
-import { $, elements } from "./utils/elements.js"
+import { remove as removePreloader } from "/js/components/preloader.js"
+import { $ } from "/js/utils/elements.js"
 
 // animations
-import * as a from "./utils/animations.js"
+import * as a from "/js/utils/animations.js"
 
 // select elements
 const [ signIn, signUp ] = $(".user-action")
