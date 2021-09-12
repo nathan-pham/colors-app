@@ -37,6 +37,7 @@ button {
     text-decoration: none;
     outline: none;
     background: none;
+    user-select: none;
     padding: 0.5rem 0.75rem;
     font-size: 100%;
     border-radius: 0.5rem;
@@ -123,15 +124,132 @@ button:disabled:hover {
     color: gray;
 }
 
-/*
-<div class="notification">
-        <!-- neutral: <ion-icon name="notifications-outline"></ion-icon> -->
-        <!-- bug: <ion-icon name="bug-outline"></ion-icon> -->
-        <!-- info: <ion-icon name="information-outline"></ion-icon> -->
+/* navigation component */
+.wrapper {
+    max-width: 50rem;
+    padding: 0 1rem;
+    margin: 0 auto;
+}
 
-        <h1>Success!</h1>
-        <p>You can now log in.</p>
-    </div>
+.wrapper .navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+}
+
+.wrapper .navigation > div {
+    display: flex;
+    align-items: center;
+}
+
+.wrapper .navigation h1 {
+    margin: 0;
+    color: dodgerblue;
+}
+
+.wrapper .navigation .divider {
+    height: 1.25rem;
+    width: 1px;
+    background: gray;
+    margin-left: 1rem;
+}
+
+.wrapper .navigation button {
+    margin-left: 1rem;
+}
+
+.wrapper .navigation .navigation-link {
+    margin-left: 1rem;
+    color: gray;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.wrapper .navigation .navigation-link:hover {
+    color: #000;
+}
+
+.wrapper .navigation .profile {
+    margin-left: 1rem;
+    position: relative;
+}
+
+.wrapper .navigation .profile .profile-circle {
+    user-select: none;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    background: dodgerblue;
+    color: #fff;
+}
+
+.wrapper .navigation .profile .options-wrapper {
+    position: absolute;
+    right: 0;
+    top: 2rem;
+    opacity: 0;
+    padding-top: 1rem;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+
+.wrapper .navigation .profile .profile-options {
+    background: #fff;
+    border: 1px solid gray;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.25rem;
+    min-width: 8rem;
+}
+
+.wrapper .navigation .profile .profile-options a {
+    text-decoration: none;
+    display: block;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: #fff;
+    color: gray;
+    transition: background 0.2s, color 0.2s; 
+}
+
+.wrapper .navigation .profile .profile-options a:hover {
+    background: #eaeaea;
+    color: #000;
+}
+
+.wrapper .navigation .profile .profile-options a.logout {
+    color: red;
+}
+
+.wrapper .navigation .profile .profile-options a.logout:hover {
+    background: red;
+    color: #fff;
+}
+
+.wrapper .navigation .profile:hover .options-wrapper {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/*
+            <div class="profile">
+                <a href="/~" class="profile-circle" id="<%= user.key %>">
+                    <%= new String(user.name).trim().charAt(0) %>
+                </a>
+
+
+                <div class="options-wrapper">
+                    <div class="profile-options">
+                        <a href="#">resources</a>
+                        <a href="#">profile</a>    
+                        <a href="#" class="logout">logout</a>  
+                    </div>
+                </div>
+            </div>
 */
 
 /* animations */

@@ -1,49 +1,3 @@
-.wrapper {
-    max-width: 50rem;
-    padding: 0 1rem;
-    margin: 0 auto;
-}
-
-.wrapper .navigation {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 0;
-}
-
-.wrapper .navigation > div {
-    display: flex;
-    align-items: center;
-}
-
-.wrapper .navigation h1 {
-    margin: 0;
-    color: dodgerblue;
-}
-
-.wrapper .navigation .divider {
-    height: 1.25rem;
-    width: 1px;
-    background: gray;
-    margin-left: 1rem;
-}
-
-.wrapper .navigation button {
-    margin-left: 1rem;
-}
-
-.wrapper .navigation a {
-    margin-left: 1rem;
-    color: gray;
-    cursor: pointer;
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-.wrapper .navigation a:hover {
-    color: #000;
-}
-
 .hero {
     text-align: center;
     max-width: 22rem;
@@ -240,9 +194,3 @@
     margin: 1.25rem 0 0 0;
     width: 100%;
 }
-
-/*            <div class="input">
-                <ion-icon name="person-circle-outline"></ion-icon>
-                <input placeholder="Full Name" type="text" />
-            </div>
-*/

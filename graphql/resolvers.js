@@ -1,17 +1,7 @@
-const { Deta } = require("deta")
-
-const deta = Deta(process.env.DETA_PROJECT_KEY)
-const palettesDB = deta.Base("palettes")
-const usersDB = deta.Base("users")
-
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
 
-const format = (obj) => ({
-    ...obj,
-    key: null,
-    id: obj.key
-})
+const { usersDB, format } = require("../deta")
 
 module.exports = {
     Query: {
@@ -44,7 +34,11 @@ module.exports = {
             }
         },
 
-        logoutUser: () => {}
+        logoutUser: (_, args, { res }) => {
+            const invalidToken = req.cookies.JWT_SECRET
+            res.clearCookie("JWT_TOKEN")
+            return invalidToken
+        }
     },
 
     Mutation: {

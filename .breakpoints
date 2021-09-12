@@ -7,6 +7,14 @@
         "version": 1686,
         "index": 258
       }
+    ],
+    "public/js/pages/dashboard.js": [
+      {
+        "id": "40d55941-2c5e-469f-971c-a2fd5bec5a2e",
+        "line": 1,
+        "version": 0,
+        "index": 0
+      }
     ]
   }
 }

@@ -5,7 +5,7 @@
 
     <title>coloors | explore</title>
 
-    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/pages/index.css" />
     <script src="/js/pages/index.js" type="module"></script>
 </head>
 <body>
@@ -14,19 +14,7 @@
     </div> -->
 
     <div class="wrapper">
-        <nav class="navigation">
-            <h1>coloors</h1>
-
-            <div>
-                <a href="/generate">generate</a>
-                <a href="/">explore</a>
-
-                <span class="divider"></span>
-
-                <button class="user-action">sign in</button>
-                <button class="user-action primary">sign up</button>
-            </div>
-        </nav>
+        <%- include("./components/navigation.html"); %>
 
         <section class="hero">
             <h1>Inspirational Color Palettes</h1>

@@ -21,7 +21,7 @@ const typeDefs = gql`
         getUserPalettes: [Palette!]!
 
         loginUser(email: String!, password: String!): User!
-        logoutUser: User!
+        logoutUser: String!
     }
 
     type Mutation {

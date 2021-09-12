@@ -1,27 +1,42 @@
-const jwt = require("jsonwebtoken")
+const { usersDB, authorized, format } = require("../deta")
 
-const authorized = (req) => {
-    const token = req.cookies.JWT_TOKEN
-    return token && await jwt.verify(token, process.env.JWT_SECRET)
+const fetchUser = async (req) => {
+    const { email } = await authorized(req)
+    return email ? (await usersDB.fetch({ email })).items[0] : false
 }
 
 module.exports = (app, config) => {
-	app.get("/", (req, res) => {
-		res.render("index.html", config)
+	app.get("/", async (req, res) => {
+        const user = await fetchUser(req)
+        
+        res.render("index.html", user
+            ? { ...config, user }
+            : config
+        )
 	})
 
     app.get("/~", async (req, res) => {
-        authoried(req)
-            ? res.render("dashboard.html", config)
+        const user = await fetchUser(req)
+
+        user
+            ? res.render("dashboard.html", { user })
             : res.redirect("/")
 	})
 
     app.get("/generate", (req, res) => {
-		res.render("generate.html", config)
+		res.render("generate.html")
 	})
+
+    app.get("/resources", (req, res) => {
+		res.render("resources.html")
+    })
 
     app.get("/generate/:id", (req, res) => {
         console.log(req.params.id)
-		res.render("generate.html", config)
+		res.render("generate.html")
+    })
+
+    app.get("/u/:id", (req, res) => {
+		res.render("generate.html")
     })
 }
