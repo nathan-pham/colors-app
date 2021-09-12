@@ -70,6 +70,10 @@ button:disabled:hover {
     background: rgb(93, 174, 255);
 }
 
+a {
+    text-decoration: none;
+}
+
 /* preloader overlay */
 .preloader {
     height: 100%;
@@ -234,23 +238,6 @@ button:disabled:hover {
     opacity: 1;
     pointer-events: auto;
 }
-
-/*
-            <div class="profile">
-                <a href="/~" class="profile-circle" id="<%= user.key %>">
-                    <%= new String(user.name).trim().charAt(0) %>
-                </a>
-
-
-                <div class="options-wrapper">
-                    <div class="profile-options">
-                        <a href="#">resources</a>
-                        <a href="#">profile</a>    
-                        <a href="#" class="logout">logout</a>  
-                    </div>
-                </div>
-            </div>
-*/
 
 /* animations */
 @keyframes a-spin {

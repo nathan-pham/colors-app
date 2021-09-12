@@ -1,0 +1,77 @@
+.palette-wrapper .palette {
+    flex: 1 1 calc((100% / 3) - 1rem);
+    max-width: calc(100% / 3);
+    border: 1px solid gray;
+    padding: 0.75rem;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.palette-wrapper .palette:hover {
+    box-shadow: 0 0.5rem 1rem #eaeaea;
+    transform: translateY(-0.5rem);
+}
+
+.palette-wrapper .palette .colors {
+    height: 9rem;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    border-radius: 0.5rem;
+}
+
+.palette-wrapper .palette .colors .color {
+    height: 100%;
+    width: 100%;
+}
+
+.palette-wrapper .palette .details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: gray;
+    margin-top: 0.75rem;
+}
+
+.palette-wrapper .palette .details p {
+    margin: 0;
+}
+
+.focus-wrapper {
+    margin: 2rem 0 0 0;
+}
+
+.focus-wrapper h1 {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.focus-wrapper img {
+    margin: 1rem 0 0 0;
+    width: 20rem;
+}
+
+.focus-wrapper p {
+    margin: 1rem 0 0 0;
+    line-height: 1.5;
+    color: gray;
+}
+
+.focus-wrapper button {
+    margin: 0.5rem 0 0 0;
+}
+
+        /* 
+                <section class="focus-wrapper">
+            <h1>Color Palettes</h1>
+
+            <img src="/assets/color_palette.svg" width="50%" />
+
+            <p>Looks like you don't have any color palettes! Explore palettes for inspiration or make your own.</p>
+
+            <a href="/generate">
+                <button class="primary">create palette</button>
+            </a>
+        </section>
+         */

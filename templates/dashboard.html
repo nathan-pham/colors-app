@@ -4,12 +4,50 @@
     <%- include("./components/globals.html"); %>
     
     <title>coloors | dashboard</title>
+
+    <link rel="stylesheet" href="/css/pages/dashboard.css" />
 </head>
 <body>
     <div class="wrapper">
         <%- include("./components/navigation.html"); %>
 
-        <h1>Dashboard</h1>
+        <section class="focus-wrapper">
+            <h1>Color Palettes</h1>
+
+            <img src="/assets/color_palette.svg" />
+
+            <p>Looks like you don't have any color palettes! Explore palettes for inspiration or make your own.</p>
+
+            <a href="/generate">
+                <button class="primary">create palette</button>
+            </a>
+        </section>
+        <!-- <div class="palette-wrapper">
+            <div class="palette">
+                <div class="colors">
+                    <div class="color" style="background: red"></div>
+                    <div class="color" style="background: blue"></div>
+                </div>
+
+                <div class="details">
+                    <p>0 saves</p>
+                    <ion-icon name="ellipsis-horizontal"></ion-icon>
+                </div>
+            </div>
+        </div> -->
+
+                    <!-- div({ class: "palette" }, 
+                div({ class: "colors" },
+                    ...this.palette.map(color => div({ 
+                        class: "color", 
+                        style: `background: ${color}` 
+                    }))
+                ),
+                div({ class: "details" }, 
+                    p({}, saves),
+                    ionicon({ name: "ellipsis-horizontal" })
+                )
+            ) -->
     </div>
 </body>
 </html>

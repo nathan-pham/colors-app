@@ -1,5 +1,3 @@
-import "https://cdn.jsdelivr.net/npm/ionicons/dist/ionicons/ionicons.esm.js"
-
 // components
 import signUpModal from "/js/components/modal/signUpModal.js"
 import signInModal from "/js/components/modal/signInModal.js"

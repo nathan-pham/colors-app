@@ -33,7 +33,6 @@
     transition: box-shadow 0.2s, transform 0.2s;
 }
 
-
 .palette-wrapper .palette:hover {
     box-shadow: 0 0.5rem 1rem #eaeaea;
     transform: translateY(-0.5rem);
@@ -191,6 +190,7 @@
 
 .form-wrapper .form .input input:-webkit-autofill {
     box-shadow: 0 0 0px 1000px white inset;
+    filter: none;
 }
 
 .form-wrapper .form button {

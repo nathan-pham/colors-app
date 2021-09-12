@@ -20,9 +20,3 @@
 .error-wrapper button {
     margin: 0.75rem 0 0 0;
 }
-/*
-    <div class="error-wrapper">
-        <h1><%= error %></h1>
-        <p><%= error == 404 ? "Page not found" : "Internal server error" %></p>
-    </div>
-*/

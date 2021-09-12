@@ -12,7 +12,7 @@ const authorized = (req) => {
 
     return token
         ? jwt.verify(token, process.env.JWT_SECRET)
-        : {}
+        : false
 }
 
 // format deta response by renaming key -> id
