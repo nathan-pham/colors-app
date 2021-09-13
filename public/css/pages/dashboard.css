@@ -1,6 +1,12 @@
+.palette-wrapper {
+    gap: 1.25rem;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin-top: 2rem;
+}
+
 .palette-wrapper .palette {
-    flex: 1 1 calc((100% / 3) - 1rem);
-    max-width: calc(100% / 3);
+    width: 100%;
     border: 1px solid gray;
     padding: 0.75rem;
     overflow: hidden;

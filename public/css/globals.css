@@ -152,7 +152,8 @@ a {
     color: dodgerblue;
 }
 
-.wrapper .navigation .divider {
+.divider {
+    display: inline-flex;
     height: 1.25rem;
     width: 1px;
     background: gray;
@@ -197,6 +198,7 @@ a {
     right: 0;
     top: 2rem;
     opacity: 0;
+    z-index: 50;
     padding-top: 1rem;
     pointer-events: none;
     transition: opacity 0.2s;
@@ -208,6 +210,7 @@ a {
     border-radius: 0.5rem;
     padding: 0.5rem 0.25rem;
     min-width: 8rem;
+    box-shadow: 0 0.5rem 1rem #eaeaea;
 }
 
 .wrapper .navigation .profile .profile-options a {
@@ -237,6 +240,103 @@ a {
 .wrapper .navigation .profile:hover .options-wrapper {
     opacity: 1;
     pointer-events: auto;
+}
+
+/* sign in & sign up form */
+
+.form-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.form-wrapper .form {
+    background: #fff;
+    padding: 1.25rem;
+    border-radius: 0.75rem;
+    min-width: 25rem;
+    text-align: center;
+    position: relative;
+}
+
+.form-wrapper .form .close {
+    position: absolute;
+    left: 0.75rem;
+    top: 0.75rem;
+    color: gray;
+    font-size: 1.75rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.form-wrapper .form .close:hover {
+    color: #000;
+}
+
+.form-wrapper .form h1 {
+    margin: 0;
+}
+
+.form-wrapper .form p {
+    margin: 0.5rem 0 2rem 0;
+    color: gray;
+}
+
+.form-wrapper .form .input {
+    width: 100%;
+    margin: 1.25rem 0 0 0;
+    border: 1px solid rgb(201, 201, 201);
+    color: rgb(201, 201, 201);
+    outline: none;
+    border-radius: 0.5rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+.form-wrapper .form .input ion-icon {
+    font-size: 1.75rem;
+    margin: 0 0.75rem;
+}
+
+.form-wrapper .form .input:hover {
+    border-color: gray;
+    color: gray;
+}
+
+.form-wrapper .form .input:focus-within {
+    border-color: dodgerblue;
+    color: dodgerblue;
+}
+
+.form-wrapper .form .input input {
+    width: 100%;
+    height: 100%;
+    font-size: 100%;
+    padding: 0.75rem;
+    padding-left: 0;
+    border: none;
+    outline: none;
+}
+
+.form-wrapper .form .input input:-webkit-autofill {
+    box-shadow: 0 0 0px 1000px white inset;
+    filter: none;
+}
+
+.form-wrapper .form button {
+    padding: 0.75rem 1rem;
+    margin: 1.25rem 0 0 0;
+    width: 100%;
 }
 
 /* animations */

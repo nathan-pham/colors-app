@@ -4,10 +4,68 @@
     <%- include("./components/globals.html"); %>
     
     <title>coloors | generate</title>
+
+    <link rel="stylesheet" href="/css/pages/generate.css" />
+    <script src="/js/pages/generate.js" type="module"></script>
 </head>
 <body>
     <div class="wrapper">
         <%- include("./components/navigation.html"); %>
+
+        <div class="color-generator">
+            <div class="generator">
+                <p>Press space to create a new color palette based on your settings</p>
+
+                <div class="color-wrapper">
+                    <div class="color" style="background: red"></div>
+                    <div class="color" style="background: blue"></div>
+                    <div class="color" style="background: green"></div>
+                    <div class="color" style="background: yellow"></div>
+                </div>
+            </div>
+
+            <div class="generator-options">
+                <div>
+                    <select>
+                        <option>mono</option>
+                        <option>contrast</option>
+                        <option>triade</option>
+                        <option>tetrade</option>
+                        <option>analogic</option>
+                    </select>
+
+                    <select>
+                        <option>pastel</option>
+                        <option>soft</option>
+                        <option>light</option>
+                        <option>hard</option>
+                        <option>pale</option>
+                    </select>
+                </div>
+                
+                <div class="options">
+                    <div class="option">
+                        <ion-icon name="camera-outline"></ion-icon>
+                        photo
+                    </div>
+
+                    <div class="option">
+                        <ion-icon name="eye-outline"></ion-icon>
+                        view
+                    </div>
+
+                    <div class="option">
+                        <ion-icon name="share-outline"></ion-icon>
+                        export
+                    </div>
+
+                    <div class="option">
+                        <ion-icon name="bookmark-outline"></ion-icon>
+                        save
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

@@ -15,7 +15,8 @@ module.exports = (app, config) => {
                 user
                     ? res.render(template, { user, ...next(req, res) })
                     : res.redirect("/")
-
+                break
+                
             case "loose":
             default:
                 res.render(template, { ...config, user })

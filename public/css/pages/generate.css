@@ -1,0 +1,119 @@
+.color-generator .generator {
+    height: calc(100vh - 9rem);
+    width: 100%;
+    border-radius: 0.5rem;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.color-generator .generator p {
+    margin: 0 0 1rem 0;
+    color: gray;
+}
+
+.color-generator .generator .color-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 0.5rem;
+}
+
+.color-generator .generator .color {
+    height: 100%;
+    width: 100%;
+}
+
+.color-generator .generator-options {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid gray;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+}
+
+.color-generator .generator-options select {
+    min-width: 6rem;
+    padding: 0.5rem;
+    font-size: 100%;
+    background: dodgerblue;
+    color: #fff;
+    border: 1px solid dodgerblue;
+    border-radius: 0.5rem;
+    outline: none;
+}
+
+.color-generator .generator-options select {
+    margin: 0 0.5rem 0 0;
+}
+
+.color-generator .generator-options select option {
+    background: #fff;
+    color: #000;
+}
+
+.color-generator .generator-options .options {
+    display: flex;
+    color: #4d4d4d;
+    cursor: pointer;
+}
+
+.color-generator .generator-options .options .option {
+    display: flex;
+    align-items: center;
+    margin: 0 1.25rem 0 0;
+    transition: color 0.2s;
+}
+
+.color-generator .generator-options .options .option:hover {
+    color: dodgerblue;
+}
+
+.color-generator .generator-options .options ion-icon {
+    font-size: 1.25rem;
+    margin: 0 0.5rem 0 0;
+}
+
+/*
+            <div class="generator-options">
+                <select>
+                    <option>mono</option>
+                    <option>contrast</option>
+                    <option>triade</option>
+                    <option>tetrade</option>
+                    <option>analogic</option>
+                </select>
+
+                <select>
+                    <option>pastel</option>
+                    <option>soft</option>
+                    <option>light</option>
+                    <option>hard</option>
+                    <option>pale</option>
+                </select>
+
+                <div class="option">
+                    <ion-icon name="camera-outline"></ion-icon>
+                    photo
+                </div>
+
+                <div class="option">
+                    <ion-icon name="eye-outline"></ion-icon>
+                    view
+                </div>
+
+                <div class="option">
+                    <ion-icon name="share-outline"></ion-icon>
+                    export
+                </div>
+
+                <div class="option">
+                    <ion-icon name="bookmark-outline"></ion-icon>
+                    save
+                </div>
+            </div>
+*/
