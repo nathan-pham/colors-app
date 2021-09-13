@@ -47,7 +47,7 @@ const signInOptions = () => {
     signUp.addEventListener("click", onClick("signUpModal"))
 }
 
-if(!$(".profile")) {
+if($(".user-action")) {
     signInOptions()
 }
 

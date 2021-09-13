@@ -2,41 +2,46 @@ const { usersDB, authorized, format } = require("../deta")
 
 const fetchUser = async (req) => {
     const { email } = await authorized(req)
-    return email ? (await usersDB.fetch({ email })).items[0] : false
+    return email ? (await usersDB.fetch({ email })).items[0] : null
 }
 
 module.exports = (app, config) => {
-	app.get("/", async (req, res) => {
+    const restrict = (_template, type, next=() => ({})) => async (req, res) => {
+        const template = _template + ".html"
         const user = await fetchUser(req)
         
-        res.render("index.html", user
-            ? { ...config, user }
-            : config
-        )
-	})
+        switch(type) {
+            case "force":
+                user
+                    ? res.render(template, { user, ...next(req, res) })
+                    : res.redirect("/")
 
-    app.get("/~", async (req, res) => {
-        const user = await fetchUser(req)
+            case "loose":
+            default:
+                res.render(template, { ...config, user })
+        }
+    }
 
-        user
-            ? res.render("dashboard.html", { user })
-            : res.redirect("/")
-	})
+	app.get("/", restrict("index"))
 
-    app.get("/generate", (req, res) => {
-		res.render("generate.html")
-	})
+    app.get("/~", restrict("dashboard", "force"))
 
-    app.get("/resources", (req, res) => {
-		res.render("resources.html")
-    })
+    app.get("/generate", restrict("generate"))
 
-    app.get("/generate/:id", (req, res) => {
+    app.get("/generate/:id", restrict("generate", "loose", (req, res) => {
         console.log(req.params.id)
-		res.render("generate.html")
-    })
+        return {}
+    }))
 
-    app.get("/u/:id", (req, res) => {
-		res.render("generate.html")
-    })
+    app.get("/resources", restrict("resources"))
+
+    // app.get("/u/:id", async (req, res) => {
+    //     //         const user = await fetchUser(req)
+        
+    //     // res.render("index.html", user
+    //     //     ? { ...config, user }
+    //     //     : config
+    //     // )
+	// 	res.render("generate.html")
+    // })
 }
