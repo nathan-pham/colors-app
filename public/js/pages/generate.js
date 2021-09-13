@@ -1,5 +1,7 @@
 import Sortable from "https://esm.run/sortablejs"
 
+// component utilities
+import { create as createNotification } from "/js/components/notification.js"
 import { pick, partition } from "/js/utils/random.js"
 import { $, elements } from "/js/utils/elements.js"
 
@@ -26,7 +28,15 @@ const colorSlice = (background) => {
         ion_icon({ name: "move-outline", class: "handle" }),
         ion_icon({ name: "options-outline" }),
         locked,
-        ion_icon({ name: "trash-outline", onClick: () => color.remove() })
+        ion_icon({ name: "trash-outline", onClick: () => {
+            if(size - 1 < 2) {
+                console.log("ok")
+                createNotification({ icon: "error", title: "Bruh", text: "Palettes need to be larger than 2 colors!" })
+            } else {
+                size--
+                color.remove()
+            }
+        }})
     )
 
     return color

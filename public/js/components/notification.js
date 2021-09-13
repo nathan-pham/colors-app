@@ -12,14 +12,13 @@ const aliases = {
 }
 
 // notification component
-const notification =  ({ icon="default", text, title }={}) => (
+const notification = ({ icon="default", text, title }={}) => (
     div({ class: "notification" },
         ion_icon({ name: `${ aliases[icon] || aliases["default"] }-outline` }),
         h1({}, title),
         p({}, text)
     )
 )
-
 
 export const create = (config) => {
     // base animations
