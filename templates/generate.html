@@ -16,17 +16,14 @@
             <div class="generator">
                 <p>Press space to create a new color palette based on your settings</p>
 
-                <div class="color-wrapper">
-                    <div class="color" style="background: red"></div>
-                    <div class="color" style="background: blue"></div>
-                    <div class="color" style="background: green"></div>
-                    <div class="color" style="background: yellow"></div>
-                </div>
+                <div class="color-wrapper"></div>
             </div>
 
             <div class="generator-options">
                 <div>
-                    <select>
+                    <button class="primary" title="new palette">create palette</button>
+                    <!-- <select title="color scheme">
+                        <option>default</option>
                         <option>mono</option>
                         <option>contrast</option>
                         <option>triade</option>
@@ -34,32 +31,33 @@
                         <option>analogic</option>
                     </select>
 
-                    <select>
+                    <select title="color variation">
+                        <option>default</option>
                         <option>pastel</option>
                         <option>soft</option>
                         <option>light</option>
                         <option>hard</option>
                         <option>pale</option>
-                    </select>
+                    </select> -->
                 </div>
                 
                 <div class="options">
-                    <div class="option">
+                    <div class="option" title="generate palette from photo">
                         <ion-icon name="camera-outline"></ion-icon>
                         photo
                     </div>
 
-                    <div class="option">
+                    <div class="option" title="view colors">
                         <ion-icon name="eye-outline"></ion-icon>
                         view
                     </div>
 
-                    <div class="option">
+                    <div class="option" title="export as JSON">
                         <ion-icon name="share-outline"></ion-icon>
                         export
                     </div>
 
-                    <div class="option">
+                    <div class="option" title="save to dashboard">
                         <ion-icon name="bookmark-outline"></ion-icon>
                         save
                     </div>

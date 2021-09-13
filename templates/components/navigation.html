@@ -9,9 +9,9 @@
 
         <% if(locals.user) { %>
             <div class="profile">
-                <a href="/~" class="profile-circle" id="<%= user.key %>">
+                <div class="profile-circle" id="<%= user.key %>">
                     <%= new String(user.name).trim().charAt(0) %>
-                </a>
+                </div>
 
 
                 <div class="options-wrapper">
