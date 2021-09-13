@@ -25,7 +25,33 @@
 .color-generator .generator .color {
     height: 100%;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+.color-generator .generator .color ion-icon {
+    mix-blend-mode: exclusion;
+    font-size: 1.75rem;
+    color: #fff;
+    margin: 0 0.75rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.color-generator .generator .color:hover ion-icon {
+    opacity: 1;
+}
+
+/*
+                    <div class="color" style="background: #8922d0">
+                        <ion-icon name="move-outline"></ion-icon>
+                        <ion-icon name="options-outline"></ion-icon>
+                        <ion-icon name="lock-open-outline"></ion-icon>
+                        <ion-icon name="trash-outline"></ion-icon>
+                    </div>
+*/
 
 .color-generator .generator-options {
     width: 100%;
