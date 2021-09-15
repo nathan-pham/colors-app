@@ -5,7 +5,7 @@ import { create as createNotification } from "/js/components/notification.js"
 import { pick, partition } from "/js/utils/random.js"
 import { $, elements } from "/js/utils/elements.js"
 
-const { div, ion_icon } = elements
+const { div, input, ion_icon } = elements
 
 // select elements
 const colorWrapper = $(".color-generator .color-wrapper")
@@ -24,13 +24,19 @@ const colorSlice = (background) => {
         locked.name = color.dataset.locked == "true" ? "lock-closed-outline" : "lock-open-outline"
     }})
 
+    const colorInput = div({ class: "input-color" },
+        ion_icon({ name: "options-outline" }),
+        input({ type: "color", value: `#${ background }`, onChange: (e) => {
+            color.style.background = e.target.value
+        }})
+    )
+
     const color = div({ class: "color", style: `background: #${ background }` },
         ion_icon({ name: "move-outline", class: "handle" }),
-        ion_icon({ name: "options-outline" }),
+        colorInput,
         locked,
         ion_icon({ name: "trash-outline", onClick: () => {
             if(size - 1 < 2) {
-                console.log("ok")
                 createNotification({ icon: "error", title: "Bruh", text: "Palettes need to be larger than 2 colors!" })
             } else {
                 size--
@@ -52,7 +58,10 @@ const createPalette = (genesis) => {
     const colors = $(colorWrapper, ".color")
     for(const color of (colors || [])) {
         if(color.dataset.locked == "false" || !color.dataset.locked) {
-            color.style.background = "#" + Math.floor(Math.random() * 8 ** 8).toString(16).padStart(6, '0')
+            const generatedColor = "#" + Math.floor(Math.random() * 8 ** 8).toString(16).padStart(6, '0')
+
+            color.style.background = generatedColor
+            $(color, "input[type='color']").value = generatedColor
         }
     }
 }

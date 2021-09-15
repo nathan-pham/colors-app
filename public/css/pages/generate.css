@@ -40,18 +40,22 @@
     transition: opacity 0.2s;
 }
 
+.color-generator .generator .color .input-color {
+    position: relative;
+}
+
+.color-generator .generator .color .input-color ion-icon {
+    position: absolute;
+    left: 0;
+}
+.color-generator .generator .color .input-color input[type="color"] {
+    opacity: 0;
+    cursor: pointer;
+}
+
 .color-generator .generator .color:hover ion-icon {
     opacity: 1;
 }
-
-/*
-                    <div class="color" style="background: #8922d0">
-                        <ion-icon name="move-outline"></ion-icon>
-                        <ion-icon name="options-outline"></ion-icon>
-                        <ion-icon name="lock-open-outline"></ion-icon>
-                        <ion-icon name="trash-outline"></ion-icon>
-                    </div>
-*/
 
 .color-generator .generator-options {
     width: 100%;
@@ -105,43 +109,3 @@
     font-size: 1.25rem;
     margin: 0 0.5rem 0 0;
 }
-
-/*
-            <div class="generator-options">
-                <select>
-                    <option>mono</option>
-                    <option>contrast</option>
-                    <option>triade</option>
-                    <option>tetrade</option>
-                    <option>analogic</option>
-                </select>
-
-                <select>
-                    <option>pastel</option>
-                    <option>soft</option>
-                    <option>light</option>
-                    <option>hard</option>
-                    <option>pale</option>
-                </select>
-
-                <div class="option">
-                    <ion-icon name="camera-outline"></ion-icon>
-                    photo
-                </div>
-
-                <div class="option">
-                    <ion-icon name="eye-outline"></ion-icon>
-                    view
-                </div>
-
-                <div class="option">
-                    <ion-icon name="share-outline"></ion-icon>
-                    export
-                </div>
-
-                <div class="option">
-                    <ion-icon name="bookmark-outline"></ion-icon>
-                    save
-                </div>
-            </div>
-*/

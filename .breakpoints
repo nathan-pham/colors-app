@@ -1,5 +1,13 @@
 {
   "files": {
+    "public/css/pages/generate.css": [
+      {
+        "id": "8fa84e99-5091-4c93-8333-d16b2825b020",
+        "line": 41,
+        "version": 2575,
+        "index": 821
+      }
+    ],
     "public/js/components/modal/signUpModal.js": [
       {
         "id": "a01aa91f-97a5-47b4-8f5d-a06fd1bc8c01",
