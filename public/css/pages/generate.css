@@ -68,6 +68,10 @@
     user-select: none;
 }
 
+.color-generator .generator-options button:first-child {
+    margin: 0 0.4rem 0 0;
+}
+
 .color-generator .generator-options select {
     min-width: 6rem;
     padding: 0.5rem;

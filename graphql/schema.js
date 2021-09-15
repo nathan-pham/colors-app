@@ -33,6 +33,7 @@ const typeDefs = gql`
 `
 
 /*
+
 database structure
 {
     user: [

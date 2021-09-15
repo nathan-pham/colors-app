@@ -9,3 +9,7 @@ export const partition = (array, size=4) => {
 
     return arrays
 }
+
+export const color = () => (
+    '#' + Math.floor(Math.random() * 8 ** 8).toString(16).padStart(6, '0')
+)

@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
 
-const { usersDB, format } = require("../deta")
+const { usersDB, palettesDB, authorized, format } = require("../deta")
 
 module.exports = {
     Query: {
@@ -61,12 +61,12 @@ module.exports = {
                 : new Error("Missing a required field")
         },
 
-        createPalette: async (_, { colors }, { res }) => {
-            // req.cookies.JWT_SECRET
-
-            return colors
-                ? format(await palettesDB.put({ likes: 0, colors: [] }))
-                : new Error("Missing a required field")
+        createPalette: async (_, { colors }, { req }) => {
+            return (await authorized(req))
+                ? colors
+                    ? format(await palettesDB.put({ likes: 0, colors }))
+                    : new Error("Missing a required field")
+                : new Error("You are not authorized to perform this action")
         },
 
         updatePalette: (_, { id, colors, sign=0 }) => {
