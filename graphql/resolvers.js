@@ -61,8 +61,12 @@ module.exports = {
                 : new Error("Missing a required field")
         },
 
-        createPalette: async (_, { colors }) => {
-            format(await palettesDB.put({ likes: 0, colors: [] }))
+        createPalette: async (_, { colors }, { res }) => {
+            // req.cookies.JWT_SECRET
+
+            return colors
+                ? format(await palettesDB.put({ likes: 0, colors: [] }))
+                : new Error("Missing a required field")
         },
 
         updatePalette: (_, { id, colors, sign=0 }) => {

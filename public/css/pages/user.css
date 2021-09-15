@@ -1,0 +1,31 @@
+.profile-hero {
+    margin: 4rem 0 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.profile-hero .hero-picture {
+    height: 8rem;
+    width: 8rem;
+    font-size: 3rem;
+    font-weight: bold;
+    border-radius: 50%;
+    color: #fff;
+    background: dodgerblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-hero h1 {
+    margin: 1.5rem 0 0 0;
+    font-size: 2rem;
+}
+
+        /*         <div class="profile-hero">
+            <div class="hero-picture">N</div>
+            <h1 class="hero-title">Nathan Pham</h1>
+        </div> */

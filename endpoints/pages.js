@@ -10,16 +10,22 @@ module.exports = (app, config) => {
         const template = _template + ".html"
         const user = await fetchUser(req)
         
+        const result = {
+            user,
+            ...config,
+            ...next(req, res)
+        }
+
         switch(type) {
             case "force":
                 user
-                    ? res.render(template, { user, ...next(req, res) })
+                    ? res.render(template, result)
                     : res.redirect("/")
                 break
                 
             case "loose":
             default:
-                res.render(template, { ...config, user })
+                res.render(template, result)
         }
     }
 
@@ -35,6 +41,16 @@ module.exports = (app, config) => {
     }))
 
     app.get("/resources", restrict("resources"))
+
+    app.get("/u/:id",  restrict("user", "loose", (req, res) => {
+        
+        return {
+            id: req.params.id
+        }
+
+            // return email ? (await usersDB.fetch({ email })).items[0] : null
+
+    }))
 
     // app.get("/u/:id", async (req, res) => {
     //     //         const user = await fetchUser(req)

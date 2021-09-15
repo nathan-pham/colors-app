@@ -1,0 +1,45 @@
+.palette-wrapper {
+    gap: 1.25rem;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin-top: 2rem;
+}
+
+.palette-wrapper .palette {
+    width: 100%;
+    border: 1px solid gray;
+    padding: 0.75rem;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.palette-wrapper .palette:hover {
+    box-shadow: 0 0.5rem 1rem #eaeaea;
+    transform: translateY(-0.5rem);
+}
+
+.palette-wrapper .palette .colors {
+    height: 9rem;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    border-radius: 0.5rem;
+}
+
+.palette-wrapper .palette .colors .color {
+    height: 100%;
+    width: 100%;
+}
+
+.palette-wrapper .palette .details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: gray;
+    margin-top: 0.75rem;
+}
+
+.palette-wrapper .palette .details p {
+    margin: 0;
+}
