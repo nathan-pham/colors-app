@@ -6,6 +6,10 @@
     <title>coloors | generate</title>
 
     <link rel="stylesheet" href="/css/pages/generate.css" />
+
+    <script>
+        const GENESIS = JSON.parse(`<%- locals.palette ? JSON.stringify(locals.palette.colors) : "[]" %>`)
+    </script>
     <script src="/js/pages/generate.js" type="module"></script>
 </head>
 <body>

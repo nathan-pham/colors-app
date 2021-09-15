@@ -1,31 +1,30 @@
-const { usersDB, authorized, format } = require("../deta")
-
-const fetchUser = async (req) => {
-    const { email } = await authorized(req)
-    return email ? (await usersDB.fetch({ email })).items[0] : null
-}
+const { fetchUser, fetchPalette } = require("../deta")
 
 module.exports = (app, config) => {
-    const restrict = (_template, type, next=() => ({})) => async (req, res) => {
+    const restrict = (_template, type, _next=() => ({})) => async (req, res) => {
         const template = _template + ".html"
         const user = await fetchUser(req)
         
-        const result = {
-            user,
-            ...config,
-            ...next(req, res)
-        }
+        const next = await _next(req, res)
 
-        switch(type) {
-            case "force":
-                user
-                    ? res.render(template, result)
-                    : res.redirect("/")
-                break
-                
-            case "loose":
-            default:
-                res.render(template, result)
+        if(next) {
+            const result = {
+                user,
+                ...config,
+                ...next
+            }
+
+            switch(type) {
+                case "force":
+                    user
+                        ? res.render(template, result)
+                        : res.redirect("/")
+                    break
+                    
+                case "loose":
+                default:
+                    res.render(template, result)
+            }
         }
     }
 
@@ -35,9 +34,14 @@ module.exports = (app, config) => {
 
     app.get("/generate", restrict("generate"))
 
-    app.get("/generate/:id", restrict("generate", "loose", (req, res) => {
-        console.log(req.params.id)
-        return {}
+    app.get("/generate/:id", restrict("generate", "loose", async (req, res) => {
+        const palette = await fetchPalette(req)
+
+        if(palette) {
+            return { palette }
+        } else {
+            res.status(404).render("error.html", { error: 404 })
+        }
     }))
 
     app.get("/resources", restrict("resources"))

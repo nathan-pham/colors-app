@@ -12,6 +12,7 @@ const typeDefs = gql`
 
     type Palette {
         id: ID!
+        author: ID!
         likes: Int!
         colors: [String!]!
     }
@@ -26,9 +27,10 @@ const typeDefs = gql`
 
     type Mutation {
         createUser(name: String!, email: String!, password: String!): User!
-
         createPalette(colors: [String!]!): Palette!
-        updatePalette(id: ID!, colors: [String], sign: Int!): Palette!
+
+        updatePalette(id: ID!, colors: [String]): [String!]!
+        likePalette(id: ID!, sign: Int!): Int!
     }
 `
 

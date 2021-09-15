@@ -10,6 +10,9 @@ const { a, div, input, ion_icon } = elements
 // query
 import graphql from "/js/utils/graphql.js"
 
+// color utilities
+import { rgbToHex } from "/js/utils/color.js"
+
 // select elements
 const colorWrapper = $(".color-generator .color-wrapper")
 const [ addButton, generateButton ] = $(".color-generator button")
@@ -40,7 +43,7 @@ const getAllColors = () => (
 )
 
 // global variable managing palette size
-let size = 4
+let size = GENESIS.length || 4
 
 const colorSlice = (background) => {
     const locked = ion_icon({ name: "lock-open-outline", onClick: () => {
@@ -61,7 +64,7 @@ const colorSlice = (background) => {
         locked,
         ion_icon({ name: "trash-outline", onClick: () => {
             if(size - 1 < 2) {
-                createNotification({ icon: "error", title: "Bruh", text: "Palettes need to be larger than 2 colors!" })
+                createNotification({ icon: "error", title: "Too small", text: "Palettes need to be larger than 2 colors!" })
             } else {
                 size--
                 color.remove()
@@ -73,11 +76,10 @@ const colorSlice = (background) => {
 }
 
 const genesisPalette = () => {
-    new Array(size).fill("color").forEach(() => {
-        colorWrapper.appendChild(colorSlice("#808080"))
+    new Array(size).fill("color").forEach((_, i) => {
+        colorWrapper.appendChild(colorSlice(rgbToHex(GENESIS[i]) || "#808080"))
     })
 }
-
 
 const createPalette = (genesis) => {
     const colors = $(colorWrapper, ".color")
@@ -98,12 +100,47 @@ document.addEventListener("keypress", e => {
 generateButton.addEventListener("click", createPalette)
 
 addButton.addEventListener("click", () => {
-    size++
-    colorWrapper.appendChild(colorSlice(randomColor()))
+    if(size + 1 > 10) {
+        createNotification({ icon: "error", title: "Too big", text: "Your color palette can't be larger than 10 colors!" })
+    } else {
+        size++
+        colorWrapper.appendChild(colorSlice(randomColor()))
+    }
 })
 
 saveOption.addEventListener("click", () => {
-    console.log(getAllColors())
+    const lastPathname = location.pathname.split('/').filter(n => n.length).pop()
+    const saveAsNew = lastPathname == "generate"
+
+    const graphqlNotify = (errors) => {
+        createNotification(errors
+            ? { icon: "bug", title: "Retry that...", text: errors[0].message }
+            : { icon: "info", title: "Saved", text: "Successfully saved your color palette." }
+        )
+    }
+
+    if(saveAsNew) {
+        graphql(`
+            mutation Mutation {
+                createPalette(colors: ${ JSON.stringify(getAllColors()) }) {
+                    id
+                }
+            }
+        `).then(async ({ data, errors }) => {
+            if(!errors) {
+                history.pushState({}, "coloors | generate", `/generate/${ data.createPalette.id }`)
+                createNotification(errors)
+            }
+        })
+    } else {
+        graphql(`
+            mutation Mutation {
+                updatePalette(id: "${ lastPathname }", colors: ${ JSON.stringify(getAllColors()) })
+            }
+        `).then(async ({ data, errors }) => {
+            graphqlNotify(errors)
+        })
+    }
 })
 
 exportOption.addEventListener("click", () => {
@@ -112,4 +149,7 @@ exportOption.addEventListener("click", () => {
 
 // initialize palette
 genesisPalette()
-createPalette()
+
+if(!GENESIS.length) {
+    createPalette()
+}

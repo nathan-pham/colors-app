@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
 
-const { usersDB, palettesDB, authorized, format } = require("../deta")
+const { usersDB, palettesDB, fetchUser, authorized, format } = require("../deta")
 
 module.exports = {
     Query: {
@@ -61,15 +61,30 @@ module.exports = {
                 : new Error("Missing a required field")
         },
 
-        createPalette: async (_, { colors }, { req }) => {
-            return (await authorized(req))
-                ? colors
-                    ? format(await palettesDB.put({ likes: 0, colors }))
-                    : new Error("Missing a required field")
-                : new Error("You are not authorized to perform this action")
+        createPalette: async (_, { colors=[] }, { req }) => {
+            const user = await fetchUser(req)
+
+            if(user) {
+                const palette = await palettesDB.put({ likes: 0, colors, author: user.key })
+                await usersDB.update({ palettes: user.palettes.concat(palette.key) }, user.key)
+                return format(palette)
+            } else {
+                return new Error("You are not authorized to perform this action")
+            }
         },
 
-        updatePalette: (_, { id, colors, sign=0 }) => {
+        updatePalette: async (_, { id, colors }, { req }) => {
+            const user = await fetchUser(req)
+
+            if(user && user.palettes.includes(id)) {
+                await palettesDB.update({ colors }, id)
+                return colors
+            } else {
+                return new Error("You are not authorized to perform this action")
+            }
+        },
+
+        likePalette: (_, { id, sign }, { req }) => {
             // Math.sign(sign)
         }
     }
