@@ -23,64 +23,24 @@
         </section>
 
         <section class="palette-wrapper">
-            <div class="palette">
-                <div class="colors">
-                    <div class="color" style="background: red"></div>
-                    <div class="color" style="background: blue"></div>
-                </div>
+            <% if(locals.palettes) { 
+                for(const palette of locals.palettes) {
+                    const colors = palette.colors.map(c => (
+                        `<div class="color" style="background: ${c}"></div>`
+                    )).join(" ")
+            %>
+                    <div class="palette">
+                        <div class="colors">
+                            <%- colors %>
+                        </div>
 
-                <div class="details">
-                    <p>0 saves</p>
-                    <ion-icon name="ellipsis-horizontal"></ion-icon>
-                </div>
-            </div>
-            <div class="palette">
-                <div class="colors">
-                    <div class="color" style="background: red"></div>
-                    <div class="color" style="background: blue"></div>
-                </div>
-
-                <div class="details">
-                    <p>0 saves</p>
-                    <ion-icon name="ellipsis-horizontal"></ion-icon>
-                </div>
-            </div>
-            
-            <div class="palette">
-                <div class="colors">
-                    <div class="color" style="background: red"></div>
-                    <div class="color" style="background: blue"></div>
-                </div>
-
-                <div class="details">
-                    <p>0 saves</p>
-                    <ion-icon name="ellipsis-horizontal"></ion-icon>
-                </div>
-            </div>
-            
-            <div class="palette">
-                <div class="colors">
-                    <div class="color" style="background: red"></div>
-                    <div class="color" style="background: blue"></div>
-                </div>
-
-                <div class="details">
-                    <p>0 saves</p>
-                    <ion-icon name="ellipsis-horizontal"></ion-icon>
-                </div>
-            </div>
-            
-            <div class="palette">
-                <div class="colors">
-                    <div class="color" style="background: red"></div>
-                    <div class="color" style="background: blue"></div>
-                </div>
-
-                <div class="details">
-                    <p>0 saves</p>
-                    <ion-icon name="ellipsis-horizontal"></ion-icon>
-                </div>
-            </div>
+                        <div class="details">
+                            <p><%- palette.likes %> saves</p>
+                            <ion-icon name="ellipsis-horizontal"></ion-icon>
+                        </div>
+                    </div>
+            <%  }
+            } %>
         </section>
 
         <footer>

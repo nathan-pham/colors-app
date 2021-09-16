@@ -1,4 +1,4 @@
-const { fetchUser, fetchPalette } = require("../deta")
+const { fetchUser, fetchPalette, palettesDB } = require("../deta")
 
 module.exports = (app, config) => {
     const restrict = (_template, type, _next=() => ({})) => async (req, res) => {
@@ -28,7 +28,11 @@ module.exports = (app, config) => {
         }
     }
 
-	app.get("/", restrict("index"))
+	app.get("/", restrict("index", "loose", async (req, res) => {
+        return {
+            palettes: ((await palettesDB.fetch()).items || [])
+        }
+    }))
 
     app.get("/~", restrict("dashboard", "force"))
 

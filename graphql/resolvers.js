@@ -5,7 +5,9 @@ const { usersDB, palettesDB, fetchUser, authorized, format } = require("../deta"
 
 module.exports = {
     Query: {
-        getAllPalettes: () => {},
+        getAllPalettes: async () => (
+            ((await palettesDB.fetch()).items || []).map(format)
+        ),
         
         getUserPalettes: () => {},
 

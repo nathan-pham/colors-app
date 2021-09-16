@@ -114,7 +114,7 @@ saveOption.addEventListener("click", () => {
 
     const graphqlNotify = (errors) => {
         createNotification(errors
-            ? { icon: "bug", title: "Retry that...", text: errors[0].message }
+            ? { icon: "error", title: "Retry that...", text: errors[0].message }
             : { icon: "info", title: "Saved", text: "Successfully saved your color palette." }
         )
     }
@@ -127,9 +127,10 @@ saveOption.addEventListener("click", () => {
                 }
             }
         `).then(async ({ data, errors }) => {
+            graphqlNotify(errors)
+
             if(!errors) {
                 history.pushState({}, "coloors | generate", `/generate/${ data.createPalette.id }`)
-                createNotification(errors)
             }
         })
     } else {

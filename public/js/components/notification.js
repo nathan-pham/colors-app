@@ -14,7 +14,7 @@ const aliases = {
 // notification component
 const notification = ({ icon="default", text, title }={}) => (
     div({ class: "notification" },
-        ion_icon({ name: `${ aliases[icon] || aliases["default"] }-outline` }),
+        ion_icon({ name: `${ aliases[icon] }-outline` }),
         h1({}, title),
         p({}, text)
     )

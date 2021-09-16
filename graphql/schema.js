@@ -34,26 +34,4 @@ const typeDefs = gql`
     }
 `
 
-/*
-
-database structure
-{
-    user: [
-        {
-            id,
-            email,
-            password
-        }
-    ],
-    palettes: [
-        {
-            id: 0
-            likes: 0
-            colors: []
-            author: userId
-        }
-    ]
-}
-*/
-
 module.exports = typeDefs
