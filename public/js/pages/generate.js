@@ -16,7 +16,7 @@ import { rgbToHex } from "/js/utils/color.js"
 // select elements
 const colorWrapper = $(".color-generator .color-wrapper")
 const [ addButton, generateButton ] = $(".color-generator button")
-const [ photoOption, viewOption, exportOption, saveOption ] = $(".options .option")
+const [ viewOption, forkOption, exportOption, saveOption ] = $(".options .option")
 
 // initalize sortable
 new Sortable($(".color-wrapper"), {
@@ -44,6 +44,14 @@ const getAllColors = () => (
 
 // global variable managing palette size
 let size = GENESIS.length || 4
+
+// create preset notifications
+const graphqlNotify = (errors) => {
+    createNotification(errors
+        ? { icon: "error", title: "Retry that...", text: errors[0].message }
+        : { icon: "info", title: "Saved", text: "Successfully saved your color palette." }
+    )
+}
 
 const colorSlice = (background) => {
     const locked = ion_icon({ name: "lock-open-outline", onClick: () => {
@@ -108,16 +116,25 @@ addButton.addEventListener("click", () => {
     }
 })
 
+forkOption.addEventListener("click", () => {
+    graphql(`
+        mutation Mutation {
+            createPalette(colors: ${ JSON.stringify(getAllColors()) }) {
+                id
+            }
+        }
+    `).then(async ({ data, errors }) => {
+        graphqlNotify(errors)
+
+        if(!errors) {
+            history.pushState({}, "coloors | generate", `/generate/${ data.createPalette.id }`)
+        }
+    })
+})
+
 saveOption.addEventListener("click", () => {
     const lastPathname = location.pathname.split('/').filter(n => n.length).pop()
     const saveAsNew = lastPathname == "generate"
-
-    const graphqlNotify = (errors) => {
-        createNotification(errors
-            ? { icon: "error", title: "Retry that...", text: errors[0].message }
-            : { icon: "info", title: "Saved", text: "Successfully saved your color palette." }
-        )
-    }
 
     if(saveAsNew) {
         graphql(`

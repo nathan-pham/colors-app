@@ -40,6 +40,18 @@
     margin-top: 0.75rem;
 }
 
+.palette-wrapper .palette .details a {
+    color: gray;
+    text-decoration: none;
+    display: inline-flex;
+    font-size: 1.25rem;
+    transition: color 0.2s;
+}
+
+.palette-wrapper .palette .details a:hover {
+    color: #000;
+}
+
 .palette-wrapper .palette .details p {
     margin: 0;
 }

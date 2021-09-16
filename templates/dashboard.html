@@ -23,6 +23,8 @@
                 <a href="/generate">
                     <button class="primary">create palette</button>
                 </a>
+            <% } else { %>
+                <p>Wow, look at all those color palettes! Share them to the world!</p>
             <% } %>
         </section>
 
@@ -40,7 +42,7 @@
 
                     <div class="details">
                         <p><%- palette.likes %> saves</p>
-                        <ion-icon name="ellipsis-horizontal"></ion-icon>
+                        <a href="/generate/<%= palette.key %>"><ion-icon name="open-outline"></ion-icon></a>
                     </div>
                 </div>
             <%  }
