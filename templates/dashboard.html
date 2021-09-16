@@ -6,6 +6,7 @@
     <title>coloors | dashboard</title>
 
     <link rel="stylesheet" href="/css/pages/dashboard.css" />
+    <link rel="stylesheet" href="/css/shared/palette.css" />
 </head>
 <body>
     <div class="wrapper">
@@ -14,40 +15,38 @@
         <section class="focus-wrapper">
             <h1>Color Palettes</h1>
 
-            <img src="/assets/color_palette.svg" />
+            <% if(!locals.palettes.length) { %>
+                <img src="/assets/color_palette.svg" />
 
-            <p>Looks like you don't have any color palettes! Explore palettes for inspiration or make your own.</p>
+                <p>Looks like you don't have any color palettes! Explore palettes for inspiration or make your own.</p>
 
-            <a href="/generate">
-                <button class="primary">create palette</button>
-            </a>
+                <a href="/generate">
+                    <button class="primary">create palette</button>
+                </a>
+            <% } %>
         </section>
-        <!-- <div class="palette-wrapper">
-            <div class="palette">
-                <div class="colors">
-                    <div class="color" style="background: red"></div>
-                    <div class="color" style="background: blue"></div>
-                </div>
 
-                <div class="details">
-                    <p>0 saves</p>
-                    <ion-icon name="ellipsis-horizontal"></ion-icon>
-                </div>
-            </div>
-        </div> -->
+        <section class="palette-wrapper">
+            <% if(locals.palettes) { 
+                for(const palette of locals.palettes) {
+                    const colors = palette.colors.map(c => (
+                        `<div class="color" style="background: ${c}"></div>`
+                    )).join("\n")
+            %>
+                <div class="palette">
+                    <div class="colors">
+                        <%- colors %>
+                    </div>
 
-                    <!-- div({ class: "palette" }, 
-                div({ class: "colors" },
-                    ...this.palette.map(color => div({ 
-                        class: "color", 
-                        style: `background: ${color}` 
-                    }))
-                ),
-                div({ class: "details" }, 
-                    p({}, saves),
-                    ionicon({ name: "ellipsis-horizontal" })
-                )
-            ) -->
+                    <div class="details">
+                        <p><%- palette.likes %> saves</p>
+                        <ion-icon name="ellipsis-horizontal"></ion-icon>
+                    </div>
+                </div>
+            <%  }
+            } %>
+
+        </section>
     </div>
 </body>
 </html>

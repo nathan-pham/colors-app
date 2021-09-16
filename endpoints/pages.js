@@ -34,7 +34,15 @@ module.exports = (app, config) => {
         }
     }))
 
-    app.get("/~", restrict("dashboard", "force"))
+    app.get("/~", restrict("dashboard", "force", async (req, res) => {
+        const user = await fetchUser(req)
+
+        return {
+            palettes: user.palettes.length
+                ? await Promise.all(user.palettes.map(p => fetchPalette(p)))
+                : []
+        }
+    }))
 
     app.get("/generate", restrict("generate"))
 

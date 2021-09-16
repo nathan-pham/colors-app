@@ -1,8 +1,8 @@
 .palette-wrapper {
-    gap: 1.25rem;
     display: grid;
     grid-template-columns: auto auto auto;
     margin-top: 2rem;
+    gap: 1.25rem;
 }
 
 .palette-wrapper .palette {
@@ -16,7 +16,7 @@
 
 .palette-wrapper .palette:hover {
     box-shadow: 0 0.5rem 1rem #eaeaea;
-    transform: translateY(-0.5rem);
+    transform: translateY(-0.5rem) translateZ(0);
 }
 
 .palette-wrapper .palette .colors {
