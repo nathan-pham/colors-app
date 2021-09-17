@@ -27,12 +27,13 @@ const registerWorker = () => {
 export const createApp = (mode) => {
     console.log(`Warning: running in ${mode} mode.`)
 
-    // blockSource()
-    // forceSecure()
+    blockSource()
+    forceSecure()
 
-    if(mode == PRODUCTION) {
-        registerWorker()
-    }
+    // TODO: write a service worker for offline mode
+    // if(mode == PRODUCTION) {
+    //     registerWorker()
+    // }
 }
 
 createApp(MODE)
