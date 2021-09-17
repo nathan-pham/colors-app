@@ -8,8 +8,6 @@ module.exports = {
         getAllPalettes: async () => (
             ((await palettesDB.fetch()).items || []).map(format)
         ),
-        
-        getUserPalettes: () => {},
 
         loginUser: async (_, { email, password }, { res }) => {
             const user = (await usersDB.fetch({ email })).items[0]
@@ -86,25 +84,33 @@ module.exports = {
             }
         },
 
-        likePalette: (_, { id, sign }, { req }) => {
+        incrementFork: async (_, { id }, { req }) => {
+            const user = await fetchUser(req)
+            
+            if(user) {
+                if(!user.palettes.includes(id)) {
+                    await palettesDB.update({ likes: palettesDB.util.increment() }, id)
+                }
+
+                return id
+            } else {
+                // TODO: make custom errors
+                throw new Error("You are not authorized to perform this action")
+            }
             // Math.sign(sign)
+        },
+
+        deletePalette: async (_, { id }, { req }) => {
+            const user = await fetchUser(req)
+
+            if(user && user.palettes.includes(id)) {
+                await palettesDB.delete(id)
+                await usersDB.update({ palettes: user.palettes.filter(p => p !== id) }, user.key)
+                
+                return id
+            } else {
+                return new Error("You are not authorized to perform this action")
+            }
         }
     }
 }
-
-/*
-    type Query {
-        getAllPalettes: [Palette!]!
-        getUserPalettes(id: ID!): [Palette!]!
-
-        loginUser: User!
-        logoutUser: User!
-    }
-
-    type Mutation {
-        createUser(email: String!, password: String!): User!
-
-        createPalette(colors: [String!]!): Palette!
-        updatePalette(id: ID!): Palette!
-    }
-*/

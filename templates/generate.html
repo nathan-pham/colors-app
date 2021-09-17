@@ -13,12 +13,14 @@
     <script src="/js/pages/generate.js" type="module"></script>
 </head>
 <body>
+    <%- include("./components/preloader.html"); %>
+
     <div class="wrapper">
         <%- include("./components/navigation.html"); %>
 
         <div class="color-generator">
             <div class="generator">
-                <p>Press space to create a new color palette based on your settings</p>
+                <p>Press space to generate a new color palette.</p>
 
                 <div class="color-wrapper"></div>
             </div>
@@ -28,33 +30,15 @@
                     <button title="add a new color slot">add color</button>
 
                     <button class="primary" title="new palette">refresh palette</button>
-
-                    <!-- <select title="color scheme">
-                        <option>default</option>
-                        <option>mono</option>
-                        <option>contrast</option>
-                        <option>triade</option>
-                        <option>tetrade</option>
-                        <option>analogic</option>
-                    </select>
-
-                    <select title="color variation">
-                        <option>default</option>
-                        <option>pastel</option>
-                        <option>soft</option>
-                        <option>light</option>
-                        <option>hard</option>
-                        <option>pale</option>
-                    </select> -->
                 </div>
                 
                 <div class="options">
-                    <div class="option" title="view colors">
-                        <ion-icon name="settings-outline"></ion-icon>
-                        config
+                    <div class="option" title="delete palette">
+                        <ion-icon name="trash-outline"></ion-icon>
+                        delete
                     </div>
                     
-                    <div class="option" title="generate palette from photo">
+                    <div class="option" title="clone palette">
                         <ion-icon name="git-branch-outline"></ion-icon>
                         fork
                     </div>

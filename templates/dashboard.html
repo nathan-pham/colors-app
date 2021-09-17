@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="/css/shared/palette.css" />
 </head>
 <body>
+    <%- include("./components/preloader.html"); %>
+
     <div class="wrapper">
         <%- include("./components/navigation.html"); %>
 
@@ -41,7 +43,7 @@
                     </div>
 
                     <div class="details">
-                        <p><%- palette.likes %> saves</p>
+                        <p><%- palette.likes %> forks</p>
                         <a href="/generate/<%= palette.key %>"><ion-icon name="open-outline"></ion-icon></a>
                     </div>
                 </div>
@@ -49,6 +51,8 @@
             } %>
 
         </section>
+
+        <footer class="empty"></footer>
     </div>
 </body>
 </html>

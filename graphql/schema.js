@@ -19,7 +19,6 @@ const typeDefs = gql`
 
     type Query {
         getAllPalettes: [Palette!]!
-        getUserPalettes: [Palette!]!
 
         loginUser(email: String!, password: String!): User!
         logoutUser: String!
@@ -30,7 +29,8 @@ const typeDefs = gql`
         createPalette(colors: [String!]!): Palette!
 
         updatePalette(id: ID!, colors: [String]): [String!]!
-        likePalette(id: ID!, sign: Int!): Int!
+        incrementFork(id: ID!): String!
+        deletePalette(id: ID!): String!
     }
 `
 

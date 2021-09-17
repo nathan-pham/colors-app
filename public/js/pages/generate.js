@@ -1,55 +1,51 @@
 import Sortable from "https://esm.run/sortablejs"
 
 // component utilities
+import deleteModal from "/js/components/modal/deleteModal.js"
 import { create as createNotification } from "/js/components/notification.js"
 import { color as randomColor } from "/js/utils/random.js"
 import { $, elements } from "/js/utils/elements.js"
 
-const { a, div, input, ion_icon } = elements
+const {  div, input, ion_icon } = elements
 
 // query
 import graphql from "/js/utils/graphql.js"
 
-// color utilities
+// random stuff like color conversions & downloading files
 import { rgbToHex } from "/js/utils/color.js"
+import download from "/js/utils/download.js"
+
+// animations
+import * as a from "/js/utils/animations.js"
+const { sleep } = a
 
 // select elements
 const colorWrapper = $(".color-generator .color-wrapper")
 const [ addButton, generateButton ] = $(".color-generator button")
-const [ viewOption, forkOption, exportOption, saveOption ] = $(".options .option")
+const [ deleteOption, forkOption, exportOption, saveOption ] = $(".options .option")
 
 // initalize sortable
-new Sortable($(".color-wrapper"), {
-    handle: ".handle",
-    animation: 150
-})
-
-// download utility
-const download = (filename, text) => {
-    const el = a({
-        href: `data:text/plain;charset=utf-8, ${ encodeURIComponent(text) }`,
-        download: filename,
-        style: "display: none"
-    })
-
-    document.body.appendChild(el)
-    el.click()
-    el.remove()
-}
+new Sortable($(".color-wrapper"), { handle: ".handle", animation: 150 })
 
 // get all current colors
 const getAllColors = () => (
     $(colorWrapper, ".color").map(el => el.style.background)
 )
 
+const getId = () => (
+    location.pathname.split('/').filter(n => n.length).pop()
+)
+
 // global variable managing palette size
 let size = GENESIS.length || 4
 
 // create preset notifications
-const graphqlNotify = (errors) => {
+const graphqlNotify = (errors, fork) => {
     createNotification(errors
         ? { icon: "error", title: "Retry that...", text: errors[0].message }
-        : { icon: "info", title: "Saved", text: "Successfully saved your color palette." }
+        : fork
+            ? { icon: "info", title: "Forked", text: "Successfully forked your color palette." }
+            : { icon: "info", title: "Saved", text: "Successfully saved your color palette." }
     )
 }
 
@@ -116,24 +112,93 @@ addButton.addEventListener("click", () => {
     }
 })
 
-forkOption.addEventListener("click", () => {
-    graphql(`
-        mutation Mutation {
-            createPalette(colors: ${ JSON.stringify(getAllColors()) }) {
-                id
-            }
-        }
-    `).then(async ({ data, errors }) => {
-        graphqlNotify(errors)
+deleteOption.addEventListener("click", () => {
+    const lastPathname = getId()
+    const saveAsNew = lastPathname == "generate"
 
-        if(!errors) {
-            history.pushState({}, "coloors | generate", `/generate/${ data.createPalette.id }`)
-        }
+    if(saveAsNew) {
+        return createNotification({ icon: "error", title: "Save first", text: "Save your color palette first before deleting it!" })
+    }
+
+    const modal = deleteModal()
+    const close = $(modal, ".close")
+    const form = $(modal, ".form")
+    const button = $(modal, "button")
+
+    // TODO: move animations to component files
+    // define local animations
+    const scaleFadeOut = () => {
+        a.scaleOut(form)
+        a.fadeOut(modal, { delay: 0.5, remove: true })
+    }
+
+    const scaleFadeIn = () => {
+        a.fadeIn(modal, {  })
+        a.scaleIn(form, { delay: 0.5 })
+    }
+
+    close.addEventListener("click", () => scaleFadeOut())
+    modal.addEventListener("click", e => {
+        e.stopPropagation()
+        if(e.target === modal) { scaleFadeOut() }
     })
+
+    button.addEventListener("click", () => {
+        button.disabled = true
+
+        graphql(`
+            mutation Mutation {
+                deletePalette(id: "${ lastPathname }")
+            }
+        `).then(async ({ data, errors }) => {
+            scaleFadeOut()
+
+            await sleep(750)
+            close.click()
+
+            await sleep(1000)
+
+            if(data) {
+                createNotification({ icon: "info", title: "Deleted", text: "We're redirecting you to your dashboard." })
+                await sleep(1000)
+                location.href = "/~"
+            } else {
+                createNotification({ icon: "error", title: "Retry that...", text: errors[0].message })
+            }
+        })
+    })
+
+    document.body.appendChild(modal)
+    scaleFadeIn()
+})
+
+forkOption.addEventListener("click", () => {
+    const lastPathname = getId()
+    const saveAsNew = lastPathname == "generate"
+
+    if(saveAsNew) {
+        createNotification({ icon: "error", title: "Save first", text: "Save your color palette first before forking it!" })
+    } else {
+        graphql(`
+            mutation Mutation {
+                createPalette(colors: ${ JSON.stringify(getAllColors()) }) {
+                    id
+                }
+
+                incrementFork(id: "${ lastPathname }")
+            }
+        `).then(async ({ data, errors }) => {
+            graphqlNotify(errors, "fork")
+
+            if(!errors) {
+                history.pushState({}, "coloors | generate", `/generate/${ data.createPalette.id }`)
+            }
+        })
+    }
 })
 
 saveOption.addEventListener("click", () => {
-    const lastPathname = location.pathname.split('/').filter(n => n.length).pop()
+    const lastPathname = getId()
     const saveAsNew = lastPathname == "generate"
 
     if(saveAsNew) {

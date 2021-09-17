@@ -5,15 +5,15 @@ module.exports = (app, config) => {
         const template = _template + ".html"
         const user = await fetchUser(req)
         
-        const next = await _next(req, res)
+        const next = await _next(req, res) || {}
 
-        if(next) {
-            const result = {
-                user,
-                ...config,
-                ...next
-            }
+        const result = {
+            user,
+            ...config,
+            ...next
+        }
 
+        if(!res.headersSent) {
             switch(type) {
                 case "force":
                     user
@@ -30,7 +30,9 @@ module.exports = (app, config) => {
 
 	app.get("/", restrict("index", "loose", async (req, res) => {
         return {
-            palettes: ((await palettesDB.fetch()).items || [])
+            palettes: (
+                (await palettesDB.fetch()).items || []
+            ).sort((a, b) => b.likes - a.likes)
         }
     }))
 
@@ -38,8 +40,10 @@ module.exports = (app, config) => {
         const user = await fetchUser(req)
 
         return {
-            palettes: user.palettes.length
-                ? await Promise.all(user.palettes.map(p => fetchPalette(p)))
+            palettes: (user && user.palettes.length)
+                ? (await Promise.all(
+                    user.palettes.map(p => fetchPalette(p))
+                )).sort((a, b) => b.likes - a.likes)
                 : []
         }
     }))
@@ -58,23 +62,17 @@ module.exports = (app, config) => {
 
     app.get("/resources", restrict("resources"))
 
-    app.get("/u/:id",  restrict("user", "loose", (req, res) => {
-        
-        return {
-            id: req.params.id
+    app.get("/u/:id",  restrict("user", "loose", async (req, res) => {
+        const user = await fetchUser(req.params.id)
+
+        if(user) {
+            user.palettes = (await Promise.all(
+                user.palettes.map(p => fetchPalette(p))
+            )).sort((a, b) => b.likes - a.likes)
+
+            return { user }
+        } else {
+            res.status(404).render("error.html", { error: 404 })
         }
-
-            // return email ? (await usersDB.fetch({ email })).items[0] : null
-
     }))
-
-    // app.get("/u/:id", async (req, res) => {
-    //     //         const user = await fetchUser(req)
-        
-    //     // res.render("index.html", user
-    //     //     ? { ...config, user }
-    //     //     : config
-    //     // )
-	// 	res.render("generate.html")
-    // })
 }

@@ -24,7 +24,7 @@ const format = (obj) => ({
 
 const fetchUser = async (req) => {
     if(typeof req == "string") {
-        return (await usersDB.get(req)).items[0]
+        return (await usersDB.get(req))
     } else {
         const { email } = await authorized(req)
         return email ? (await usersDB.fetch({ email })).items[0] : null

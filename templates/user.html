@@ -6,17 +6,45 @@
     <title>coloors | profile</title>
 
     <link rel="stylesheet" href="/css/pages/user.css" />
+    <link rel="stylesheet" href="/css/shared/palette.css" />
 </head>
 <body>
+    <%- include("./components/preloader.html"); %>
+
     <div class="wrapper">
         <%- include("./components/navigation.html"); %>
     
         <div class="profile-hero">
-            <div class="hero-picture">N</div>
-            <h1 class="hero-title">Nathan Pham</h1>
+            <div class="hero-picture">
+                <%= new String(user.name).trim().charAt(0) %>
+            </div>
+            <h1 class="hero-title"><%= user.name.trim() %></h1>
         </div>
 
-        <div class="palette-wrapper"></div>
+        <% if(!user.palettes.length) { %>
+            <p class="no-palettes">This user doesn't have any palettes!</p>
+        <% } %>
+
+        <section class="palette-wrapper">
+            <% for(const palette of user.palettes) {
+                const colors = palette.colors.map(c => (
+                    `<div class="color" style="background: ${c}"></div>`
+                )).join("\n")
+            %>
+                <div class="palette">
+                    <div class="colors">
+                        <%- colors %>
+                    </div>
+
+                    <div class="details">
+                        <p><%- palette.likes %> forks</p>
+                        <a href="/generate/<%= palette.key %>"><ion-icon name="open-outline"></ion-icon></a>
+                    </div>
+                </div>
+            <% } %>
+        </section>
+
+        <footer class="empty"></footer>
     </div>
 </body>
 </html>
