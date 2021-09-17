@@ -16,17 +16,17 @@
     
         <div class="profile-hero">
             <div class="hero-picture">
-                <%= new String(user.name).trim().charAt(0) %>
+                <%= new String(profile.name).trim().charAt(0) %>
             </div>
-            <h1 class="hero-title"><%= user.name.trim() %></h1>
+            <h1 class="hero-title"><%= profile.name.trim() %></h1>
         </div>
 
-        <% if(!user.palettes.length) { %>
+        <% if(!profile.palettes.length) { %>
             <p class="no-palettes">This user doesn't have any palettes!</p>
         <% } %>
 
         <section class="palette-wrapper">
-            <% for(const palette of user.palettes) {
+            <% for(const palette of profile.palettes) {
                 const colors = palette.colors.map(c => (
                     `<div class="color" style="background: ${c}"></div>`
                 )).join("\n")

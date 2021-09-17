@@ -70,7 +70,7 @@ module.exports = (app, config) => {
                 user.palettes.map(p => fetchPalette(p))
             )).sort((a, b) => b.likes - a.likes)
 
-            return { user }
+            return { profile: user }
         } else {
             res.status(404).render("error.html", { error: 404 })
         }
