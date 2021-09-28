@@ -5,3 +5,5 @@ I learned GraphQL by creating a [color palette sharing app](https://colors-app.p
 
 ## Screenshots
 ![main app](/screenshots/main-app.png)
+![generator](/screenshots/generator.png)
+![profile](/screenshots/profile.png)
